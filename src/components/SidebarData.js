@@ -2,37 +2,37 @@ import React from "react";
 
 export const SidebarData = [
   {
-    title: "Home",
+    title: "HOME",
     path: "/",
     cName: "nav-text",
   },
   {
-    title: "About",
+    title: "ABOUT",
     path: "/about",
     cName: "nav-text",
   },
   {
-    title: "Past Projects",
+    title: "PAST PROJECTS",
     path: "/past-projects",
     cName: "nav-text",
   },
   {
-    title: "Fundraisers",
+    title: "FUNDRAISERS",
     path: "/fundraisers",
     cName: "nav-text",
   },
   {
-    title: "RGB School",
+    title: "RGB SCHOOL",
     path: "/rgb-school",
     cName: "nav-text",
   },
   {
-    title: "Join Us",
+    title: "JOIN US",
     path: "/join-us",
     cName: "nav-text",
   },
   {
-    title: "Follow Us",
+    title: "FOLLOW US",
     path: "/follow-us",
     cName: "nav-text",
   },
