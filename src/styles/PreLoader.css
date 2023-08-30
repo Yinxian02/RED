@@ -7,10 +7,25 @@
     left: 0;
     right: 0;
     z-index: 55;
-    display: flex; 
+    display: grid; 
     justify-content: center;
     align-items: center;
     overflow: hidden;
+}
+
+.preloader .logo-container{
+    display: flex; 
+    align-items: center;
+    height: 250px;
+    width: 100%;
+}
+
+.preloader .logo{
+    max-height: 100%;
+    /* max-width: 100%;   */
+    width: 50px;
+    object-fit: contain;
+    flex: 1; 
 }
 
 .preloader .texts-container{
