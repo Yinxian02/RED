@@ -1,26 +1,30 @@
+import React from 'react'
+import './App.css'
 import Navbar from './components/Navbar'
-import Home from './components/Home'
-import About from './components/About'
-import Upcoming from './components/Upcoming'
-import PastProjects from './components/PastProjects'
-import Fundraisers from './components/Fundraisers'
-import JoinUs from './components/JoinUs'
-import Donate from './components/Donate'
-import {Routes, Route} from 'react-router-dom'
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
+import Home from './pages/Home'
+import About from './pages/About'
+import PastProjects from './pages/PastProjects'
+import Fundraisers from './pages/Fundraisers'
+import RGBSchool from './pages/RGBSchool'
+import JoinUs from './pages/JoinUs'
+import FollowUs from './pages/FollowUs'
 
 function App() {
   return (
     <>
-      <Navbar/>
-      <Routes>
-        <Route path='/' element={<Home/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/upcoming' element={<Upcoming/>}/>
-        <Route path='/pastprojects' element={<PastProjects/>}/>
-        <Route path='/fundraisers' element={<Fundraisers/>}/>
-        <Route path='/joinus' element={<JoinUs/>}/>
-        <Route path='/donate' element={<Donate/>}/>
-      </Routes>      
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path='/' index element={<Home/>}/>
+          <Route path='/about' element={<About/>}/>
+          <Route path='/past-projects' element={<PastProjects/>}/>
+          <Route path='/fundraisers' element={<Fundraisers/>}/>
+          <Route path='/rgb-school' element={<RGBSchool/>}/>
+          <Route path='/join-us' element={<JoinUs/>}/>
+          <Route path='/follow-us' element={<FollowUs/>}/>
+        </Routes>      
+      </Router>
     </>
   );
 }
