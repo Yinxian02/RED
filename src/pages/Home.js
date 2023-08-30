@@ -1,10 +1,13 @@
 import React from 'react';
+import home from '../tadika kami.png' 
+import '../assets/Home.css'
 
 const Home = () => {
     return (
-      <div name='home' className='w-full h-screen bg-[#0a192f]'>
+      <div className='home-div'>
+        <img src={home} className="home" alt="home" />
       </div>
     );
   };
   
-  export default Home;
+export default Home;

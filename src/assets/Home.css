@@ -1,0 +1,9 @@
+.home-div {
+    height: 90vh;
+}
+
+.home {
+    max-width:100%;
+    height:auto;
+    /* max-height:100%; */
+}
