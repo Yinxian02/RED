@@ -12,6 +12,8 @@
   background: none;
   height: 75px;
   display: flex;
+  /* z-index:1; 
+  position: relative; */
   justify-content: flex-start;
   align-items: center;
 }
@@ -39,6 +41,8 @@
   left: 0;
   background-color: #882817;
   transition: 450ms;
+  z-index: 1;
+  /* position: relative; */
 }
 
 .nav-text {
