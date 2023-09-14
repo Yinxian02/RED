@@ -36,4 +36,9 @@ export const SidebarData = [
     path: "/follow-us",
     cName: "nav-text",
   },
+  // {
+  //   title: "ADMIN",
+  //   path: "/admin",
+  //   cName: "nav-text",
+  // },
 ];

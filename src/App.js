@@ -9,6 +9,8 @@ import Fundraisers from './pages/Fundraisers'
 import RGBSchool from './pages/RGBSchool'
 import JoinUs from './pages/JoinUs'
 import FollowUs from './pages/FollowUs'
+import Admin from './pages/Admin'
+// import ProjectsList from './components/projects-list.component'
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
           <Route path='/rgb-school' element={<RGBSchool/>}/>
           <Route path='/join-us' element={<JoinUs/>}/>
           <Route path='/follow-us' element={<FollowUs/>}/>
+          <Route path='/admin' element={<Admin/>}>
+          </Route> 
         </Routes>      
       </Router>
     </>
