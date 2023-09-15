@@ -50,9 +50,17 @@ export default class CreateProject extends Component {
   }
 
   onChangePicture(e) {
-    this.setState({
-      picture: e.target.value
-    })
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onload = () => {
+      console.log(fileReader.result)
+      this.setState({
+        picture: fileReader.result,
+      })
+    };
+    fileReader.onerror = (error) => {
+      console.log(error)
+    }
   }
 
   onChangeYoutube(e) {
@@ -86,7 +94,7 @@ export default class CreateProject extends Component {
     axios.post('http://localhost:5001/projects/add', project)
       .then(res => console.log(res.data));
 
-    window.location = '/admin';
+    // window.location = '/admin';
   }
 
   render() {
@@ -137,9 +145,10 @@ export default class CreateProject extends Component {
         <div className="form-group">
           <label>Picture: </label>
           <input 
-              type="text" 
+              type="file" 
+              accept=".jpeg, .png, .jpg"
               className="form-control"
-              value={this.state.picture}
+              // value={this.state.picture}
               onChange={this.onChangePicture}
               />
         </div>
@@ -171,4 +180,17 @@ export default class CreateProject extends Component {
     </div>
     )
   }
+}
+
+function convertToBase64(file){
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result)
+    };
+    fileReader.onerror = (error) => {
+      reject(error)
+    }
+  })
 }
