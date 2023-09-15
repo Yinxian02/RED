@@ -1,18 +1,18 @@
 import React from 'react';
-import Navbar from '../components/Navbar'
-import { BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
+import {NavLink, Outlet} from "react-router-dom";
 
-import ProjectsList from "../components/projects-list.component";
-// import EditProject from "./components/edit-project.component";
-// import CreateProject from "../components/create-project.component";
 
 function Admin() {
   return (
     <>
-      {/* <Link to="projectsList">Projects List</Link> */}
-      <Routes>
-        <Route path='/' element={<ProjectsList/>} />
-      </Routes>
+      <nav>
+        <NavLink to='create-exercise'>Create Exercise </NavLink>
+        <NavLink to='create-project'>Create Project</NavLink>
+      </nav>
+
+      <main>
+        <Outlet/>
+      </main>
     </>
   );
 }

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import DatePicker from 'react-datepicker';
-// import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateProject extends Component {
   constructor(props) {
@@ -18,35 +16,30 @@ export default class CreateProject extends Component {
 
     this.state = {
       projectName: '',
-      year: 0, 
+      year: 0,
       location: '',
       description: '',
       picture: '',
-      youtube: '',
-      report: '',
-      projects: []
+      youtube: '', 
+      report: ''
     }
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:5000/projects/')
-      .then(response => {
-        if (response.data.length > 0) {
-          this.setState({
-            users: response.data.map(user => user.username),
-            username: response.data[0].username
-          })
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-
+  onChangeProjectName(e) {
+    this.setState({
+      projectName: e.target.value
+    })
   }
 
-  onChangeUsername(e) {
+  onChangeYear(e) {
     this.setState({
-      username: e.target.value
+      year: e.target.value
+    })
+  }
+
+  onChangeLocation(e) {
+    this.setState({
+      location: e.target.value
     })
   }
 
@@ -56,58 +49,81 @@ export default class CreateProject extends Component {
     })
   }
 
-  onChangeDuration(e) {
+  onChangePicture(e) {
     this.setState({
-      duration: e.target.value
+      picture: e.target.value
     })
   }
 
-  onChangeDate(date) {
+  onChangeYoutube(e) {
     this.setState({
-      date: date
+      youtube: e.target.value
     })
   }
+
+  onChangeReport(e) {
+    this.setState({
+      report: e.target.value
+    })
+  }
+
 
   onSubmit(e) {
     e.preventDefault();
 
-    const exercise = {
-      username: this.state.username,
-      description: this.state.description,
-      duration: this.state.duration,
-      date: this.state.date
+    const project = {
+      projectName: this.state.projectName ,
+      year: this.state.year ,
+      location: this.state.location ,
+      description: this.state.description ,
+      picture: this.state.picture ,
+      youtube: this.state.youtube ,
+      report: this.state.report ,
     }
 
-    console.log(exercise);
+    console.log(project);
 
-    axios.post('http://localhost:5000/exercises/add', exercise)
+    axios.post('http://localhost:5001/projects/add', project)
       .then(res => console.log(res.data));
 
-    window.location = '/';
+    window.location = '/admin';
   }
 
   render() {
     return (
     <div>
-      <h3>Create New Exercise Log</h3>
+      <h3>Create New Project Log</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
-          <label>Username: </label>
-          <select ref="userInput"
+          <label>Project Name: </label>
+          <input  type="text"
               required
               className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}>
-              {
-                this.state.users.map(function(user) {
-                  return <option 
-                    key={user}
-                    value={user}>{user}
-                    </option>;
-                })
-              }
-          </select>
+              value={this.state.projectName}
+              onChange={this.onChangeProjectName}
+              />
         </div>
+
+        <div className="form-group">
+          <label>Year: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.duration}
+              onChange={this.onChangeYear}
+              />
+        </div>
+
+        <div className="form-group">
+          <label>Location: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.location}
+              onChange={this.onChangeLocation}
+              />
+        </div>
+
         <div className="form-group"> 
           <label>Description: </label>
           <input  type="text"
@@ -117,27 +133,39 @@ export default class CreateProject extends Component {
               onChange={this.onChangeDescription}
               />
         </div>
+
         <div className="form-group">
-          <label>Duration (in minutes): </label>
+          <label>Picture: </label>
           <input 
               type="text" 
               className="form-control"
-              value={this.state.duration}
-              onChange={this.onChangeDuration}
+              value={this.state.picture}
+              onChange={this.onChangePicture}
               />
-        </div>
-        <div className="form-group">
-          <label>Date: </label>
-          {/* <div>
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.onChangeDate}
-            />
-          </div> */}
         </div>
 
         <div className="form-group">
-          <input type="submit" value="Create Exercise Log" className="btn btn-primary" />
+          <label>Youtube: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.youtube}
+              onChange={this.onChangeYoutube}
+              />
+        </div>
+
+        <div className="form-group">
+          <label>Report: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.report}
+              onChange={this.onChangeReport}
+              />
+        </div>
+
+        <div className="form-group">
+          <input type="submit" value="Create Project Log" className="btn btn-primary" />
         </div>
       </form>
     </div>

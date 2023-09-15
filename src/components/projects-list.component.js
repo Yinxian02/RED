@@ -55,6 +55,7 @@ export default class ProjectsList extends Component {
     return (
       <div>
         <h3>Logged Projects</h3>
+        <Link to="/admin/create-project">Create</Link>
       </div>
     )
   }
