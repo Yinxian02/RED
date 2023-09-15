@@ -12,7 +12,7 @@ const Project = props => (
     <td>{props.project.youtube}</td>
     <td>{props.project.report}</td>
     <td>
-      <Link to={"/edit/"+props.project._id}>edit</Link> | <a href="#" onClick={() => { props.deleteProject(props.project._id) }}>delete</a>
+      <Link to={"/edit-project/"+props.project._id}>edit</Link> | <a href="#" onClick={() => { props.deleteProject(props.project._id) }}>delete</a>
     </td>
   </tr>
 )
@@ -27,7 +27,7 @@ export default class ProjectsList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/projects/')
+    axios.get('http://localhost:5001/projects/')
       .then(response => {
         this.setState({ projects: response.data })
       })
@@ -37,7 +37,7 @@ export default class ProjectsList extends Component {
   }
 
   deleteProject(id) {
-    axios.delete('http://localhost:5000/projects/'+id)
+    axios.delete('http://localhost:5001/projects/'+id)
       .then(response => { console.log(response.data)});
 
     this.setState({
@@ -45,7 +45,7 @@ export default class ProjectsList extends Component {
     })
   }
 
-  projectList() {
+  projectsList() {
     return this.state.projects.map(currentproject => {
       return <Project project={currentproject} deleteProject={this.deleteProject} key={currentproject._id}/>;
     })
@@ -55,7 +55,20 @@ export default class ProjectsList extends Component {
     return (
       <div>
         <h3>Logged Projects</h3>
-        <Link to="/admin/create-project">Create</Link>
+        <table className="table">
+          <thead className="thead-light">
+            <tr>
+              <th>Username</th>
+              <th>Description</th>
+              <th>Duration</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            { this.projectsList() }
+          </tbody>
+        </table>
       </div>
     )
   }

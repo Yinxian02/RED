@@ -12,6 +12,7 @@ import FollowUs from './pages/FollowUs'
 import Admin from './pages/Admin'
 import ExercisesList from './components/exercises-list.component'
 import CreateProject from './components/create-project.component'
+import ProjectsList from './components/projects-list.component'
 import CreateExercise from './components/create-exercise.component'
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path='/admin' element={<Admin/>}>
             <Route path='exercises-list' element={<ExercisesList/>}/> 
             <Route path='create-exercise' element={<CreateExercise/>}/> 
+            <Route path='projects-list' element={<ProjectsList/>}/> 
             <Route path='create-project' element={<CreateProject/>}/> 
           </Route> 
         </Routes>      
