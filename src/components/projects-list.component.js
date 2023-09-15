@@ -58,11 +58,13 @@ export default class ProjectsList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Username</th>
+              <th>Project Name</th>
+              <th>Year</th>
+              <th>Location</th>
               <th>Description</th>
-              <th>Duration</th>
-              <th>Date</th>
-              <th>Actions</th>
+              <th>Picture</th>
+              <th>Youtube</th>
+              <th>Report</th>
             </tr>
           </thead>
           <tbody>
