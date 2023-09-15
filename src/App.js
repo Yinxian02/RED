@@ -10,7 +10,7 @@ import RGBSchool from './pages/RGBSchool'
 import JoinUs from './pages/JoinUs'
 import FollowUs from './pages/FollowUs'
 import Admin from './pages/Admin'
-// import ProjectsList from './components/projects-list.component'
+import ExercisesList from './components/exercises-list.component'
 import CreateProject from './components/create-project.component'
 import CreateExercise from './components/create-exercise.component'
 
@@ -28,6 +28,7 @@ function App() {
           <Route path='/join-us' element={<JoinUs/>}/>
           <Route path='/follow-us' element={<FollowUs/>}/>
           <Route path='/admin' element={<Admin/>}>
+            <Route path='exercises-list' element={<ExercisesList/>}/> 
             <Route path='create-exercise' element={<CreateExercise/>}/> 
             <Route path='create-project' element={<CreateProject/>}/> 
           </Route> 
