@@ -2,11 +2,6 @@ import React from 'react';
 import {NavLink, Outlet, Routes, Route} from "react-router-dom";
 
 function Admin() {
-  const [user, setUser] = React.useState(null);
-
-  const handleLogin = () => setUser({ id: '1', name: 'a' });
-  // const handleLogout = () => setUser(null);
-
   const Navigation = () => {
     return (
       <nav>
@@ -26,11 +21,8 @@ function Admin() {
 
   return (
     <>
-      {user ? (
-          <Navigation/>
-          ) : (
-            <button onClick={handleLogin}>Sign In</button>
-            )}
+      <Navigation/>
+
 
       <main>
         <Outlet/>

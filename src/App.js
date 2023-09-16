@@ -2,7 +2,6 @@ import React from 'react'
 import './styles/App.css'
 import Navbar from './components/Navbar'
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
-// import { useAuthContext } from './hooks/useAuthContext'
 import Home from './pages/Home'
 import About from './pages/About'
 import PastProjects from './pages/PastProjects'
@@ -24,20 +23,12 @@ import FundraisersList from './components/fundraisers-list.component'
 import CreateFundraiser from './components/create-fundraiser.component'
 import EditFundraiser from './components/edit-fundraiser.component'
 
-import CreateUser from './components/create-user.component'
-
-import Login from "./pages/Login";
-import Signup from "./pages/SignUp";
-import PrivateRoute from "./pages/PrivateRoute.page";
-import { UserProvider } from "./contexts/user.context";
-
 function App() {
 
   return (
     <>
       <Router>
         <Navbar/>
-        <UserProvider>
           <Routes>
             <Route path='/' index element={<Home/>}/>
             <Route path='/about' element={<About/>}/>
@@ -46,24 +37,18 @@ function App() {
             <Route path='/rgb-school' element={<RGBSchool/>}/>
             <Route path='/join-us' element={<JoinUs/>}/>
             <Route path='/follow-us' element={<FollowUs/>}/>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route element={<PrivateRoute />}>
-              <Route path='admin' element={<Admin/>}>
-                <Route path='exercises-list' element={<ExercisesList/>}/> 
-                <Route path='create-exercise' element={<CreateExercise/>}/> 
-                <Route path='projects-list' element={<ProjectsList/>}/> 
-                <Route path='create-project' element={<CreateProject/>}/> 
-                <Route path='fundraisers-list' element={<FundraisersList/>}/> 
-                <Route path='create-fundraiser' element={<CreateFundraiser/>}/> 
-                <Route path='create-user' element={<CreateUser/>}/> 
-              </Route>
+            <Route path='admin' element={<Admin/>}>
+              <Route path='exercises-list' element={<ExercisesList/>}/> 
+              <Route path='create-exercise' element={<CreateExercise/>}/> 
+              <Route path='projects-list' element={<ProjectsList/>}/> 
+              <Route path='create-project' element={<CreateProject/>}/> 
+              <Route path='fundraisers-list' element={<FundraisersList/>}/> 
+              <Route path='create-fundraiser' element={<CreateFundraiser/>}/> 
             </Route>
             <Route path= '/admin/edit-exercise/:id' element={<EditExercise/>} />
             <Route path= '/admin/edit-project/:id' element={<EditProject/>} />
             <Route path= '/admin/edit-fundraiser/:id' element={<EditFundraiser/>} />
           </Routes>      
-        </UserProvider>
       </Router>
     </>
   );
