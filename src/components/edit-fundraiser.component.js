@@ -13,7 +13,7 @@ function EditFundraiser() {
     description: '',
     poster: '',
     signUp: '', 
-    addToCalendar: ''
+    // addToCalendar: ''
   });
 
   useEffect(() => {
