@@ -10,7 +10,7 @@ const fundraiserSchema = new Schema({
   poster: {type: String, required: true},
   // instagram: {type: String, required: true},
   signUp: {type: String, required: true},
-  addToCalendar: {type: Boolean, required: true}
+  // addToCalendar: {type: Boolean, required: true}
 }, {
   timestamps: true,
 });

@@ -14,7 +14,7 @@ export default class CreateFundraiser extends Component {
     this.onChangePoster = this.onChangePoster.bind(this);
     // this.onChangeInstagram = this.onChangeInstagram.bind(this);
     this.onChangeSignUp = this.onChangeSignUp.bind(this);
-    this.onChangeAddToCalendar = this.onChangeAddToCalendar.bind(this);
+    // this.onChangeAddToCalendar = this.onChangeAddToCalendar.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -25,7 +25,7 @@ export default class CreateFundraiser extends Component {
       poster: '',
     //   instagram: '', 
       signUp: '', 
-      addToCalendar: false, 
+      // addToCalendar: false, 
     }
   }
 
@@ -79,11 +79,11 @@ export default class CreateFundraiser extends Component {
     })
   }
 
-  onChangeAddToCalendar(e) {
-    this.setState({
-      addToCalendar: e.target.value
-    })
-  }
+  // onChangeAddToCalendar(e) {
+  //   this.setState({
+  //     addToCalendar: e.target.value
+  //   })
+  // }
 
   onSubmit(e) {
     e.preventDefault();
@@ -96,7 +96,7 @@ export default class CreateFundraiser extends Component {
         poster: this.state.poster ,
         // instagram: this.state.instagram ,
         signUp: this.state.signUp ,
-        addToCalendar: this.state.addToCalendar ,
+        // addToCalendar: this.state.addToCalendar ,
     }
 
     console.log(fundraiser);
@@ -182,7 +182,7 @@ export default class CreateFundraiser extends Component {
               />
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Add to Calendar: </label>
           <input 
               type="checkbox" 
@@ -190,7 +190,7 @@ export default class CreateFundraiser extends Component {
               value={this.state.addToCalendar}
               onChange={this.onChangeAddToCalendar}
               />
-        </div>
+        </div> */}
 
         <div className="form-group">
           <input type="submit" value="Create Fundraiser Log" className="btn btn-primary" />

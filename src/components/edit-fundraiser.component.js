@@ -28,7 +28,7 @@ function EditFundraiser() {
           description: data.description ,
           poster: data.poster ,
           signUp: data.signUp ,
-          addToCalendar: data.addToCalendar ,
+          // addToCalendar: data.addToCalendar ,
         });
       })
       .catch((error) => {
@@ -69,9 +69,9 @@ function EditFundraiser() {
     setFundraiser({ ...fundraiser, signUp: e.target.value });
   };
 
-  const onChangeAddToCalendar = (e) => {
-    setFundraiser({ ...fundraiser, addToCalendar: e.target.value });
-  };
+  // const onChangeAddToCalendar = (e) => {
+  //   setFundraiser({ ...fundraiser, addToCalendar: e.target.value });
+  // };
 
   
 
@@ -85,7 +85,7 @@ function EditFundraiser() {
       description: fundraiser.description ,
       poster: fundraiser.poster ,
       signUp: fundraiser.signUp ,
-      addToCalendar: fundraiser.addToCalendar ,
+      // addToCalendar: fundraiser.addToCalendar ,
     };
 
     console.log(updatedFundraiser);
@@ -162,7 +162,7 @@ function EditFundraiser() {
               />
         </div>
 
-        <div className="form-group">
+        {/* <div className="form-group">
           <label>Add To Calendar: </label>
           <input 
               type="checkbox" 
@@ -170,7 +170,7 @@ function EditFundraiser() {
               value={fundraiser.addToCalendar}
               onChange={onChangeAddToCalendar}
               />
-        </div>
+        </div> */}
 
         
 

@@ -10,7 +10,7 @@ const Fundraiser = props => (
     <td>{props.fundraiser.description}</td>
     <td><img width="100" src={props.fundraiser.poster} alt="error"/></td>
     <td>{props.fundraiser.signUp}</td>
-    <td>{props.fundraiser.addToCalendar}</td>
+    {/* <td>{props.fundraiser.addToCalendar}</td> */}
     <td>
       <Link to={"/admin/edit-fundraiser/"+props.fundraiser._id}>edit</Link> | <a href="#" onClick={() => { props.deleteFundraiser(props.fundraiser._id) }}>delete</a>
     </td>
@@ -64,7 +64,7 @@ export default class FundraisersList extends Component {
               <th>Description</th>
               <th>Poster</th>
               <th>Sign Up</th>
-              <th>Add to Calendar</th>
+              {/* <th>Add to Calendar</th> */}
             </tr>
           </thead>
           <tbody>
