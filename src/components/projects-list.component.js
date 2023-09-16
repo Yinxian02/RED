@@ -8,7 +8,7 @@ const Project = props => (
     <td>{props.project.year}</td>
     <td>{props.project.location}</td>
     <td>{props.project.description}</td>
-    <td>{props.project.picture}</td>
+    <td><img width="100" src={props.project.picture}/></td>
     <td>{props.project.youtube}</td>
     <td>{props.project.report}</td>
     <td>
