@@ -10,12 +10,17 @@ import RGBSchool from './pages/RGBSchool'
 import JoinUs from './pages/JoinUs'
 import FollowUs from './pages/FollowUs'
 import Admin from './pages/Admin'
+
 import ExercisesList from './components/exercises-list.component'
-import CreateProject from './components/create-project.component'
-import EditExercise from './components/edit-exercise.component'
-import ProjectsList from './components/projects-list.component'
 import CreateExercise from './components/create-exercise.component'
+import EditExercise from './components/edit-exercise.component'
+
+import ProjectsList from './components/projects-list.component'
+import CreateProject from './components/create-project.component'
 import EditProject from './components/edit-project.component'
+
+import FundraisersList from './components/fundraisers-list.component'
+import CreateFundraiser from './components/create-fundraiser.component'
 
 function App() {
   return (
@@ -35,6 +40,8 @@ function App() {
             <Route path='create-exercise' element={<CreateExercise/>}/> 
             <Route path='projects-list' element={<ProjectsList/>}/> 
             <Route path='create-project' element={<CreateProject/>}/> 
+            <Route path='fundraisers-list' element={<FundraisersList/>}/> 
+            <Route path='create-fundraiser' element={<CreateFundraiser/>}/> 
           </Route> 
           <Route path= '/admin/edit-exercise/:id' element={<EditExercise/>} />
           <Route path= '/admin/edit-project/:id' element={<EditProject/>} />
