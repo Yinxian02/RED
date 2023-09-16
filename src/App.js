@@ -15,6 +15,7 @@ import CreateProject from './components/create-project.component'
 import EditExercise from './components/edit-exercise.component'
 import ProjectsList from './components/projects-list.component'
 import CreateExercise from './components/create-exercise.component'
+import EditProject from './components/edit-project.component'
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path='create-project' element={<CreateProject/>}/> 
           </Route> 
           <Route path= '/admin/edit-exercise/:id' element={<EditExercise/>} />
+          <Route path= '/admin/edit-project/:id' element={<EditProject/>} />
         </Routes>      
       </Router>
     </>

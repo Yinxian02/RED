@@ -94,7 +94,7 @@ export default class CreateProject extends Component {
     axios.post('http://localhost:5001/projects/add', project)
       .then(res => console.log(res.data));
 
-    // window.location = '/admin';
+    window.location = '/admin';
   }
 
   render() {
@@ -104,7 +104,7 @@ export default class CreateProject extends Component {
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
           <label>Project Name: </label>
-          <input  type="text"
+          <input type="text"
               required
               className="form-control"
               value={this.state.projectName}
@@ -117,7 +117,7 @@ export default class CreateProject extends Component {
           <input 
               type="text" 
               className="form-control"
-              value={this.state.duration}
+              value={this.state.year}
               onChange={this.onChangeYear}
               />
         </div>

@@ -12,7 +12,7 @@ const Project = props => (
     <td>{props.project.youtube}</td>
     <td>{props.project.report}</td>
     <td>
-      <Link to={"/edit-project/"+props.project._id}>edit</Link> | <a href="#" onClick={() => { props.deleteProject(props.project._id) }}>delete</a>
+      <Link to={"/admin/edit-project/"+props.project._id}>edit</Link> | <a href="#" onClick={() => { props.deleteProject(props.project._id) }}>delete</a>
     </td>
   </tr>
 )

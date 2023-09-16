@@ -12,7 +12,7 @@ function EditExercise() {
     duration: 0,
     date: new Date(),
   });
-  const [users, setUsers] = useState([]);
+//   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
@@ -42,9 +42,9 @@ function EditExercise() {
     //   });
   }, [id]);
 
-  const onChangeUsername = (e) => {
-    setExercise({ ...exercise, username: e.target.value });
-  };
+//   const onChangeUsername = (e) => {
+//     setExercise({ ...exercise, username: e.target.value });
+//   };
 
   const onChangeDescription = (e) => {
     setExercise({ ...exercise, description: e.target.value });
