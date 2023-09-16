@@ -74,7 +74,7 @@ function EditExercise() {
       .post(`http://localhost:5001/exercises/update/${id}`, updatedExercise)
       .then((res) => console.log(res.data));
 
-    window.location = '/';
+    window.location = '/admin';
   };
 
   return (

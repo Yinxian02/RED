@@ -92,7 +92,7 @@ function EditProject() {
       .post(`http://localhost:5001/projects/update/${id}`, updatedProject)
       .then((res) => console.log(res.data));
 
-    window.location = '/admin/projects-list';
+    window.location = '/admin';
   };
 
   return (

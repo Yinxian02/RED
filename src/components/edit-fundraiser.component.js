@@ -94,7 +94,7 @@ function EditFundraiser() {
       .post(`http://localhost:5001/fundraisers/update/${id}`, updatedFundraiser)
       .then((res) => console.log(res.data));
 
-    window.location = '/admin/fundraisers-list';
+    window.location = '/admin';
   };
 
   return (
