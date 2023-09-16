@@ -4,7 +4,7 @@ import axios from 'axios';
 
 const Fundraiser = props => (
   <tr>
-    <td>{props.fundraiser.projectName}</td>
+    <td>{props.fundraiser.fundraiserName}</td>
     <td>{props.fundraiser.date.substring(0,10)}</td>
     <td>{props.fundraiser.location}</td>
     <td>{props.fundraiser.description}</td>

@@ -21,6 +21,7 @@ import EditProject from './components/edit-project.component'
 
 import FundraisersList from './components/fundraisers-list.component'
 import CreateFundraiser from './components/create-fundraiser.component'
+import EditFundraiser from './components/edit-fundraiser.component'
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           </Route> 
           <Route path= '/admin/edit-exercise/:id' element={<EditExercise/>} />
           <Route path= '/admin/edit-project/:id' element={<EditProject/>} />
+          <Route path= '/admin/edit-fundraiser/:id' element={<EditFundraiser/>} />
         </Routes>      
       </Router>
     </>
