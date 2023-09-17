@@ -1,75 +1,118 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
 
 export default class CreateExercise extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangeDuration = this.onChangeDuration.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeCreator = this.onChangeCreator.bind(this);
+    this.onChangeAge = this.onChangeAge.bind(this);
+    this.onChangeNumber = this.onChangeNumber.bind(this);
+    this.onChangeDurationHours = this.onChangeDurationHours.bind(this);
+    this.onChangeDurationMins = this.onChangeDurationMins.bind(this);
+    this.onChangeMaterials = this.onChangeMaterials.bind(this);
+    this.onChangeInstructions = this.onChangeInstructions.bind(this);
+    this.onChangeYoutube = this.onChangeYoutube.bind(this);
+    this.onChangePicture = this.onChangePicture.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
-      username: '',
-      description: '',
-      duration: 0,
-      date: new Date(),
-      users: []
+      title: '',
+      creator: '',
+      age: '',
+      number: 0,
+      durationHours: 0,
+      durationMins: 0,
+      materials: [],
+      instructions: [],
+      youtube:'',
+      picture: '',
     }
   }
 
-//   componentDidMount() {
-//     axios.get('http://localhost:5000/users/')
-//       .then(response => {
-//         if (response.data.length > 0) {
-//           this.setState({
-//             users: response.data.map(user => user.username),
-//             username: response.data[0].username
-//           })
-//         }
-//       })
-//       .catch((error) => {
-//         console.log(error);
-//       })
-
-//   }
-
-  onChangeUsername(e) {
+  onChangeTitle(e) {
     this.setState({
-      username: e.target.value
+      title: e.target.value
     })
   }
 
-  onChangeDescription(e) {
+  onChangeCreator(e) {
     this.setState({
-      description: e.target.value
+      creator: e.target.value
     })
   }
 
-  onChangeDuration(e) {
+  onChangeAge(e) {
     this.setState({
-      duration: e.target.value
+      age: e.target.value
     })
   }
 
-  onChangeDate(date) {
+  onChangeNumber(e) {
     this.setState({
-      date: date
+      number: e.target.value
     })
+  }
+
+  onChangeDurationHours(e) {
+    this.setState({
+      durationHours: e.target.value
+    })
+  }
+
+  onChangeDurationMins(e) {
+    this.setState({
+      durationMins: e.target.value
+    })
+  }
+
+  onChangeMaterials(e) {
+    this.setState({
+      materials: e.target.value
+    })
+  }
+
+  onChangeInstructions(e) {
+    this.setState({
+      instructions: e.target.value
+    })
+  }
+
+  onChangeYoutube(e) {
+    this.setState({
+      youtube: e.target.value
+    })
+  }
+
+  onChangePicture(e) {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onload = () => {
+      console.log(fileReader.result)
+      this.setState({
+        picture: fileReader.result,
+      })
+    };
+    fileReader.onerror = (error) => {
+      console.log(error)
+    }
   }
 
   onSubmit(e) {
     e.preventDefault();
 
     const exercise = {
-      username: this.state.username,
-      description: this.state.description,
-      duration: this.state.duration,
-      date: this.state.date
+      title: this.state.title,
+      creator: this.state.creator,
+      age: this.state.age,
+      number: this.state.number,
+      durationHours: this.state.durationHours,
+      durationMins: this.state.durationMins,
+      materials: this.state.materials,
+      instructions: this.state.instructions,
+      youtube:this.state.youtube,
+      picture: this.state.picture,
     }
 
     console.log(exercise);
@@ -77,7 +120,7 @@ export default class CreateExercise extends Component {
     axios.post('http://localhost:5001/exercises/add', exercise)
       .then(res => console.log(res.data));
 
-    window.location = '/admin';
+    // window.location = '/admin';
   }
 
   render() {
@@ -86,41 +129,94 @@ export default class CreateExercise extends Component {
       <h3>Create New Exercise Log</h3>
       <form onSubmit={this.onSubmit}>
         <div className="form-group"> 
-          <label>Username: </label>
-          <input  type="text"
+          <label>Title: </label>
+          <input type="text"
               required
               className="form-control"
-              value={this.state.username}
-              onChange={this.onChangeUsername}
+              value={this.state.title}
+              onChange={this.onChangeTitle}
               />
         </div>
         <div className="form-group"> 
-          <label>Description: </label>
-          <input  type="text"
+          <label>Creator: </label>
+          <input type="text"
               required
               className="form-control"
-              value={this.state.description}
-              onChange={this.onChangeDescription}
+              value={this.state.creator}
+              onChange={this.onChangeCreator}
+              />
+        </div>
+        <div className="form-group"> 
+          <label>Age: </label>
+          <input type="text"
+              required
+              className="form-control"
+              value={this.state.age}
+              onChange={this.onChangeAge}
               />
         </div>
         <div className="form-group">
-          <label>Duration (in minutes): </label>
+          <label>Hours: </label>
           <input 
               type="text" 
               className="form-control"
-              value={this.state.duration}
-              onChange={this.onChangeDuration}
+              value={this.state.durationHours}
+              onChange={this.onChangeDurationHours}
               />
         </div>
         <div className="form-group">
-          <label>Date: </label>
-          <div>
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.onChangeDate}
-            />
-          </div>
+          <label>Minutes: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.durationMins}
+              onChange={this.onChangeDurationMins}
+              />
         </div>
+
+        <div className="form-group">
+          <label>Materials: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.materials}
+              onChange={this.onChangeMaterials}
+              />
+        </div>
+
+        <div className="form-group">
+          <label>Instructions: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.instructions}
+              onChange={this.onChangeInstructions}
+              />
+        </div>
+
+        
+        <div className="form-group">
+          <label>Youtube: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.youtube}
+              onChange={this.onChangeYoutube}
+              />
+        </div>
+
+        <div className="form-group">
+          <label>Picture: </label>
+          <input 
+              type="file" 
+              accept=".jpeg, .png, .jpg"
+              className="form-control"
+              // value={this.state.picture}
+              onChange={this.onChangePicture}
+              />
+        </div>
+
+
 
         <div className="form-group">
           <input type="submit" value="Create Exercise Log" className="btn btn-primary" />

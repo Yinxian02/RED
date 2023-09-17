@@ -4,10 +4,16 @@ import axios from 'axios';
 
 const Exercise = props => (
   <tr>
-    <td>{props.exercise.username}</td>
-    <td>{props.exercise.description}</td>
-    <td>{props.exercise.duration}</td>
-    <td>{props.exercise.date.substring(0,10)}</td>
+    <td>{props.exercise.title}</td>
+    <td>{props.exercise.creator}</td>
+    <td>{props.exercise.age}</td>
+    <td>{props.exercise.number}</td>
+    <td>{props.exercise.durationHours}</td>
+    <td>{props.exercise.durationMins}</td>
+    <td>{props.exercise.materials}</td>
+    <td>{props.exercise.instructions}</td>
+    <td>{props.exercise.youtube}</td>
+    <td><img width="100" src={props.exercise.picture} alt="error"/></td>
     <td>
       <Link to={"/admin/edit-exercise/"+props.exercise._id}>edit</Link> | <a href="#" onClick={() => { props.deleteExercise(props.exercise._id) }}>delete</a>
     </td>
@@ -55,11 +61,16 @@ export default class ExercisesList extends Component {
         <table className="table">
           <thead className="thead-light">
             <tr>
-              <th>Username</th>
-              <th>Description</th>
-              <th>Duration</th>
-              <th>Date</th>
-              <th>Actions</th>
+              <th>Title</th>
+              <th>Creator</th>
+              <th>Age</th>
+              <th>Number</th>
+              <th>Duration (Hours)</th>
+              <th>Duration (Mins)</th>
+              <th>Materials</th>
+              <th>Instructions</th>
+              <th>Youtube</th>
+              <th>Picture</th>
             </tr>
           </thead>
           <tbody>

@@ -8,16 +8,28 @@ router.route('/').get((req, res) => {
 });
 
 router.route('/add').post((req, res) => {
-  const username = req.body.username;
-  const description = req.body.description;
-  const duration = Number(req.body.duration);
-  const date = Date.parse(req.body.date);
+  const title = req.body.title;
+  const creator = req.body.creator;
+  const age = req.body.age;
+  const number = req.body.number;
+  const durationHours = Number(req.body.durationHours);
+  const durationMins = Number(req.body.durationMins);
+  const materials = req.body.materials;
+  const instructions = req.body.instructions;
+  const youtube = req.body.youtube;
+  const picture = req.body.picture;
 
   const newExercise = new Exercise({
-    username,
-    description,
-    duration,
-    date,
+    title,
+    creator,
+    age,
+    number,
+    durationHours,
+    durationMins,
+    materials,
+    instructions,
+    youtube,
+    picture,
   });
 
   newExercise.save()
@@ -40,10 +52,16 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) => {
   Exercise.findById(req.params.id)
     .then(exercise => {
-      exercise.username = req.body.username;
-      exercise.description = req.body.description;
-      exercise.duration = Number(req.body.duration);
-      exercise.date = Date.parse(req.body.date);
+      exercise.title = req.body.title;
+      exercise.creator = req.body.creator;
+      exercise.age = req.body.age;
+      exercise.number = req.body.number;
+      exercise.durationHours = Number(req.body.durationHours);
+      exercise.durationMins = Number(req.body.durationMins);
+      exercise.materials = req.body.materials;
+      exercise.instructions = req.body.instructions;
+      exercise.youtube = req.body.youtube;
+      exercise.picture = req.body.picture;
 
       exercise.save()
         .then(() => res.json('Exercise updated!'))

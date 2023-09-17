@@ -7,12 +7,17 @@ import "react-datepicker/dist/react-datepicker.css";
 function EditExercise() {
   const { id } = useParams();
   const [exercise, setExercise] = useState({
-    username: '',
-    description: '',
-    duration: 0,
-    date: new Date(),
+    title: '',
+    creator: '',
+    age: '',
+    number: 0,
+    durationHours: 0,
+    durationMins: 0,
+    materials: [],
+    instructions: [],
+    youtube:'',
+    picture: '',
   });
-//   const [users, setUsers] = useState([]);
 
   useEffect(() => {
     axios
@@ -20,52 +25,107 @@ function EditExercise() {
       .then((response) => {
         const data = response.data;
         setExercise({
-          username: data.username,
-          description: data.description,
-          duration: data.duration,
-          date: new Date(data.date),
+          title: data.title,
+          creator: data.creator,
+          age: data.age,
+          number: data.number,
+          durationHours: data.durationHours,
+          durationMins: data.durationMins,
+          materials: data.materials,
+          instructions: data.instructions,
+          youtube: data.youtube,
+          picture: data.picture,
         });
       })
       .catch((error) => {
         console.log(error);
       });
 
-    // axios
-    //   .get('http://localhost:5001/users/')
-    //   .then((response) => {
-    //     if (response.data.length > 0) {
-    //       setUsers(response.data.map((user) => user.username));
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
   }, [id]);
 
-//   const onChangeUsername = (e) => {
-//     setExercise({ ...exercise, username: e.target.value });
-//   };
 
-  const onChangeDescription = (e) => {
-    setExercise({ ...exercise, description: e.target.value });
+
+  const onChangeTitle = (e) => {
+    setExercise({...exercise, 
+      title: e.target.value
+    })
   };
 
-  const onChangeDuration = (e) => {
-    setExercise({ ...exercise, duration: e.target.value });
-  };
+  const onChangeCreator = (e) => {
+    setExercise({...exercise, 
+      creator: e.target.value
+    })
+  }
 
-  const onChangeDate = (date) => {
-    setExercise({ ...exercise, date });
+  const onChangeAge = (e) => {
+    setExercise({...exercise, 
+      age: e.target.value
+    })
+  }
+
+  const onChangeNumber = (e) => {
+    setExercise({...exercise, 
+      number: e.target.value
+    })
+  }
+
+  const onChangeDurationHours = (e) => {
+    setExercise({...exercise, 
+      durationHours: e.target.value
+    })  
+  }
+
+  const onChangeDurationMins = (e) => {
+    setExercise({...exercise, 
+      durationMins: e.target.value
+    })
+  }
+
+  const onChangeMaterials = (e) => {
+    setExercise({...exercise, 
+      materials: e.target.value
+    })
+  }
+
+  const onChangeInstructions = (e) => {
+    setExercise({...exercise,
+      instructions: e.target.value
+    })
+  }
+
+  const onChangeYoutube = (e) => {
+    setExercise({...exercise,
+      youtube: e.target.value
+    })
+  }
+
+  const onChangePicture = (e) => {
+    var fileReader = new FileReader();
+    fileReader.readAsDataURL(e.target.files[0]);
+    fileReader.onload = () => {
+      console.log(fileReader.result)
+      setExercise({ ...exercise, picture: fileReader.result });
+    };
+    fileReader.onerror = (error) => {
+      console.log(error)
+    }
   };
+ 
 
   const onSubmit = (e) => {
     e.preventDefault();
 
     const updatedExercise = {
-      username: exercise.username,
-      description: exercise.description,
-      duration: exercise.duration,
-      date: exercise.date,
+      title: exercise.title,
+      creator: exercise.creator,
+      age: exercise.age,
+      number: exercise.number,
+      durationHours: exercise.durationHours,
+      durationMins: exercise.durationMins,
+      materials: exercise.materials,
+      instructions: exercise.instructions,
+      youtube: exercise.youtube,
+      picture: exercise.picture,
     };
 
     console.log(updatedExercise);
@@ -81,48 +141,92 @@ function EditExercise() {
     <div>
       <h3>Edit Exercise Log</h3>
       <form onSubmit={onSubmit}>
-        <div className="form-group">
-          <label>Username: </label>
-          {/* <select
-            required
-            className="form-control"
-            value={exercise.username}
-            onChange={onChangeUsername}
-          >
-            {users.map((user) => (
-              <option key={user} value={user}>
-                {user}
-              </option>
-            ))}
-          </select> */}
+      <div className="form-group"> 
+          <label>Title: </label>
+          <input type="text"
+              required
+              className="form-control"
+              value={exercise.title}
+              onChange={onChangeTitle}
+              />
+        </div>
+        <div className="form-group"> 
+          <label>Creator: </label>
+          <input type="text"
+              required
+              className="form-control"
+              value={exercise.creator}
+              onChange={onChangeCreator}
+              />
+        </div>
+        <div className="form-group"> 
+          <label>Age: </label>
+          <input type="text"
+              required
+              className="form-control"
+              value={exercise.age}
+              onChange={onChangeAge}
+              />
         </div>
         <div className="form-group">
-          <label>Description: </label>
-          <input
-            type="text"
-            required
-            className="form-control"
-            value={exercise.description}
-            onChange={onChangeDescription}
-          />
+          <label>Hours: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={exercise.durationHours}
+              onChange={onChangeDurationHours}
+              />
         </div>
         <div className="form-group">
-          <label>Duration (in minutes): </label>
-          <input
-            type="text"
-            className="form-control"
-            value={exercise.duration}
-            onChange={onChangeDuration}
-          />
+          <label>Minutes: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={exercise.durationMins}
+              onChange={onChangeDurationMins}
+              />
         </div>
+
         <div className="form-group">
-          <label>Date: </label>
-          <div>
-            <DatePicker
-              selected={exercise.date}
-              onChange={onChangeDate}
-            />
-          </div>
+          <label>Materials: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={exercise.materials}
+              onChange={onChangeMaterials}
+              />
+        </div>
+
+        <div className="form-group">
+          <label>Instructions: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={exercise.instructions}
+              onChange={onChangeInstructions}
+              />
+        </div>
+
+        
+        <div className="form-group">
+          <label>Youtube: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={exercise.youtube}
+              onChange={onChangeYoutube}
+              />
+        </div>
+
+        <div className="form-group">
+          <label>Picture: </label>
+          <input 
+              type="file" 
+              accept=".jpeg, .png, .jpg"
+              className="form-control"
+              // value={this.state.picture}
+              onChange={onChangePicture}
+              />
         </div>
 
         <div className="form-group">
