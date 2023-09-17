@@ -1,7 +1,9 @@
 import React from 'react';
 import {NavLink, Outlet, Routes, Route} from "react-router-dom";
+import {useAuth} from '../components/auth'
 
 function Admin() {
+  const auth = useAuth()
   const Navigation = () => {
     return (
       <nav>
