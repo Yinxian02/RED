@@ -1,7 +1,9 @@
 import React from 'react'
 import './styles/App.css'
 import Navbar from './components/Navbar'
-import Login from './components/Login'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+
 import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
@@ -23,15 +25,14 @@ import EditProject from './components/edit-project.component'
 import FundraisersList from './components/fundraisers-list.component'
 import CreateFundraiser from './components/create-fundraiser.component'
 import EditFundraiser from './components/edit-fundraiser.component'
-import { RequireAuth } from './components/RequireAuth'
-import { AuthProvider } from './components/auth'
+import { useAuthContext } from './hooks/useAuthContext'
 
 function App() {
+  const { user } = useAuthContext()
 
   return (
     <>
       <Router>
-        <AuthProvider>
         <Navbar/>
           <Routes>
             <Route path='/' index element={<Home/>}/>
@@ -41,8 +42,9 @@ function App() {
             <Route path='/rgb-school' element={<RGBSchool/>}/>
             <Route path='/join-us' element={<JoinUs/>}/>
             <Route path='/follow-us' element={<FollowUs/>}/>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='admin' element={<RequireAuth><Admin/></RequireAuth>}>
+            <Route path='/login' element={!user ?<Login/>: <Navigate to="/admin" />}/>
+            <Route path='/signup' element={!user ?<Signup/>: <Navigate to="/admin" />}/>
+            <Route path='admin' element={user ? <Admin /> : <Navigate to="/login" />}>
               <Route path='exercises-list' element={<ExercisesList/>}/> 
               <Route path='create-exercise' element={<CreateExercise/>}/> 
               <Route path='projects-list' element={<ProjectsList/>}/> 
@@ -54,7 +56,6 @@ function App() {
             <Route path= '/admin/edit-project/:id' element={<EditProject/>} />
             <Route path= '/admin/edit-fundraiser/:id' element={<EditFundraiser/>} />
           </Routes>      
-        </AuthProvider>
       </Router>
     </>
   );
