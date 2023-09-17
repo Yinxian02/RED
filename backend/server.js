@@ -30,6 +30,6 @@ app.use('/users', usersRouter);
 app.use('/projects', projectsRouter); 
 app.use('/fundraisers', fundraisersRouter); 
 
-app.listen(port, () => {
+app.listen(port || 3000, () => {
     console.log(`Server is running on port: ${port}`);
 });
