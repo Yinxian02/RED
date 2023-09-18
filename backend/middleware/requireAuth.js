@@ -1,26 +1,22 @@
-const jwt = require('jsonwebtoken')
-const User = require('../models/user.model')
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
-const requireAuth = async (req, res, next) => {
-  // verify user is authenticated
-  const { authorization } = req.headers
-
-  if (!authorization) {
-    return res.status(401).json({error: 'Authorization token required'})
-  }
-
-  const token = authorization.split(' ')[1]
-
-  try {
-    const { _id } = jwt.verify(token, process.env.SECRET)
-
-    req.user = await User.findOne({ _id }).select('_id')
-    next()
-
-  } catch (error) {
-    console.log(error)
-    res.status(401).json({error: 'Request is not authorized'})
-  }
+const requireAuth = (req, res, next) => {
+    const authHeader = req.headers.authorization || req.headers.Authorization;
+    if (!authHeader?.startsWith('Bearer ')) 
+      return res.sendStatus(401);
+    const token = authHeader.split(' ')[1];
+    console.log(token)
+    jwt.verify(
+        token,
+        process.env.ACCESS_TOKEN_SECRET,
+        (err, decoded) => {
+            if (err) return res.sendStatus(403); //invalid token
+            req.email = decoded.UserInfo.email;
+            req.roles = decoded.UserInfo.roles;
+            next();
+        }
+    );
 }
 
 module.exports = requireAuth

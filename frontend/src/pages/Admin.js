@@ -1,14 +1,14 @@
 import React from 'react';
 import { NavLink, Outlet } from "react-router-dom";
-import { useLogout } from '../hooks/useLogout'
+// import { useLogout } from '../hooks/useLogout'
 import { useAuthContext } from '../hooks/useAuthContext'
 
 function Admin() {
-  const { logout } = useLogout()
+  // const { logout } = useLogout()
   const { user } = useAuthContext()
 
   const handleClick = () => {
-    logout()
+    // logout()
   }
 
   const Navigation = () => {
