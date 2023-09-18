@@ -9,7 +9,7 @@ const loginUser = async (req, res) => {
   const {email, password} = req.body
 
     if (!email || !password) 
-      return res.status(400).json({ 'message': 'All fields required.'});
+      return res.sendStatus(400).json({ 'message': 'All fields required.'});
 
     const user = await User.findOne({ email: email }).exec();
     if (!user) 
@@ -31,7 +31,7 @@ const loginUser = async (req, res) => {
               }
           },
           process.env.ACCESS_TOKEN_SECRET,
-          { expiresIn: '100s' }
+          { expiresIn: '1000s' }
       );
       const refreshToken = jwt.sign(
           { "email": user.email },

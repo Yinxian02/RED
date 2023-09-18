@@ -1,9 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
 import {useAuthContext} from '../hooks/useAuthContext';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation} from 'react-router-dom';
 
-import axios from 'axios';
-const LOGIN_URL = 'http://localhost:5001/users/login';
+import axios from '../api/axios';
+const LOGIN_URL = '/auth';
 
 const Login = () => {
     const { setAuth } = useAuthContext();
@@ -15,24 +15,24 @@ const Login = () => {
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState('');
-    const [pwd, setPwd] = useState('');
-    const [errMsg, setErrMsg] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         userRef.current.focus();
     }, [])
 
     useEffect(() => {
-        setErrMsg('');
-    }, [user, pwd])
+        setError('');
+    }, [email, password])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             const response = await axios.post(LOGIN_URL,
-                JSON.stringify({ user, pwd }),
+                JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
                     mode: 'cors',
@@ -40,23 +40,25 @@ const Login = () => {
 
                 }
             );
+            console.log(JSON.stringify(response));
             console.log(JSON.stringify(response?.data));
-            //console.log(JSON.stringify(response));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
-            setAuth({ user, pwd, roles, accessToken });
-            setUser('');
-            setPwd('');
+
+            setAuth({ email, password, roles, accessToken });
+            setEmail('');
+            setPassword('');
+
             navigate(from, { replace: true });
         } catch (err) {
             if (!err?.response) {
-                setErrMsg('No Server Response');
+                setError('No Server Response');
             } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setError('Missing Username or Password');
             } else if (err.response?.status === 401) {
-                setErrMsg('Unauthorized');
+                setError('Unauthorized');
             } else {
-                setErrMsg('Login Failed');
+                setError('Login Failed');
             }
             errRef.current.focus();
         }
@@ -65,17 +67,17 @@ const Login = () => {
     return (
 
         <section>
-            <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+            <p ref={errRef} className={error ? "errmsg" : "offscreen"} aria-live="assertive">{error}</p>
             <h1>Sign In</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username:</label>
+                <label htmlFor="username">Email:</label>
                 <input
                     type="text"
                     id="username"
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     required
                 />
 
@@ -83,8 +85,8 @@ const Login = () => {
                 <input
                     type="password"
                     id="password"
-                    onChange={(e) => setPwd(e.target.value)}
-                    value={pwd}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                     required
                 />
                 <button>Sign In</button>
