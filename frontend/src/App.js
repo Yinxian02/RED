@@ -2,6 +2,7 @@ import React from 'react'
 import './styles/App.css'
 import Navbar from './components/Navbar'
 import Login from './pages/Login'
+/* for testing only */
 import Signup from './pages/Signup'
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'

@@ -92,7 +92,7 @@ const Login = () => {
                 <button>Sign In</button>
             </form>
             <p>
-                Need an Account?<br />
+                Register to be a builder<br />
                 <span className="line">
                     <Link to="/signup">Sign Up</Link>
                 </span>
