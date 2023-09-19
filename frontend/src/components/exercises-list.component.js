@@ -35,8 +35,8 @@ export default class ExercisesList extends Component {
 
   componentDidMount() {
     // console.log(this.context)
-    const {auth, setAuth} = this.context; 
-    console.log(auth.roles)
+    const {auth} = this.context; 
+    // console.log(auth.roles)
     const roles = auth.roles
       axios.get('http://localhost:5001/exercises/', {
       params: {
