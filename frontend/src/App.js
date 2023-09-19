@@ -14,6 +14,7 @@ import RGBSchool from './pages/RGBSchool'
 import JoinUs from './pages/JoinUs'
 import FollowUs from './pages/FollowUs'
 import Admin from './pages/Admin'
+import RequireAuth from './components/RequireAuth';
 
 import ExercisesList from './components/exercises-list.component'
 import CreateExercise from './components/create-exercise.component'
@@ -26,6 +27,12 @@ import EditProject from './components/edit-project.component'
 import FundraisersList from './components/fundraisers-list.component'
 import CreateFundraiser from './components/create-fundraiser.component'
 import EditFundraiser from './components/edit-fundraiser.component'
+
+const ROLES = {
+  'User': 2001,
+  'Editor': 2020,
+  'Admin': 5150
+}
 
 function App() {
 
@@ -43,17 +50,19 @@ function App() {
             <Route path='/follow-us' element={<FollowUs/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/signup' element={<Signup/>}/>
-            <Route path='admin' element={<Admin/>}>
-              <Route path='exercises-list' element={<ExercisesList/>}/> 
-              <Route path='create-exercise' element={<CreateExercise/>}/> 
-              <Route path='projects-list' element={<ProjectsList/>}/> 
-              <Route path='create-project' element={<CreateProject/>}/> 
-              <Route path='fundraisers-list' element={<FundraisersList/>}/> 
-              <Route path='create-fundraiser' element={<CreateFundraiser/>}/> 
+            <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
+              <Route path='admin' element={<Admin/>}>
+                <Route path='exercises-list' element={<ExercisesList/>}/> 
+                <Route path='create-exercise' element={<CreateExercise/>}/> 
+                <Route path='projects-list' element={<ProjectsList/>}/> 
+                <Route path='create-project' element={<CreateProject/>}/> 
+                <Route path='fundraisers-list' element={<FundraisersList/>}/> 
+                <Route path='create-fundraiser' element={<CreateFundraiser/>}/> 
+              </Route>
+              <Route path= '/admin/edit-exercise/:id' element={<EditExercise/>} />
+              <Route path= '/admin/edit-project/:id' element={<EditProject/>} />
+              <Route path= '/admin/edit-fundraiser/:id' element={<EditFundraiser/>} />
             </Route>
-            <Route path= '/admin/edit-exercise/:id' element={<EditExercise/>} />
-            <Route path= '/admin/edit-project/:id' element={<EditProject/>} />
-            <Route path= '/admin/edit-fundraiser/:id' element={<EditFundraiser/>} />
           </Routes>      
       </Router>
     </>

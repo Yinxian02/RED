@@ -65,12 +65,12 @@ const signupUser = async (req, res) => {
 
     try {
         //encrypt the password
-        const hashedPasswod = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10);
 
         //create and store the new user
         const result = await User.create({
             "email": email,
-            "password": hashedPasswod
+            "password": hashedPassword
         });
 
         console.log(result);

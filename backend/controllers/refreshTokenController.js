@@ -21,7 +21,7 @@ const refreshToken = async (req, res) => {
         refreshToken,
         process.env.REFRESH_TOKEN_SECRET,
         (err, decoded) => {
-            if (err || user.username !== decoded.username) 
+            if (err || user.email !== decoded.email) 
                 return res.status(403);
             const roles = Object.values(user.roles);
             const accessToken = jwt.sign(
