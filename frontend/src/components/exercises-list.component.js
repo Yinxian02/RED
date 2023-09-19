@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import AuthContext from "../context/AuthContext";
+
 const Exercise = props => (
   <tr>
     <td>{props.exercise.title}</td>
@@ -21,6 +23,8 @@ const Exercise = props => (
 )
 
 export default class ExercisesList extends Component {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
 
@@ -30,14 +34,25 @@ export default class ExercisesList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5001/exercises/')
+    // console.log(this.context)
+    const {auth, setAuth} = this.context; 
+    console.log(auth.roles)
+    const roles = auth.roles
+      axios.get('http://localhost:5001/exercises/', {
+      params: {
+        roles: roles 
+      },
+        headers: {
+          Authorization: 'Bearer ' + this.context.auth.accessToken,
+      } 
+      })
       .then(response => {
         this.setState({ exercises: response.data })
       })
       .catch((error) => {
         console.log(error);
       })
-  }
+}
 
   deleteExercise(id) {
     axios.delete('http://localhost:5001/exercises/'+id)

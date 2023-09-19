@@ -44,13 +44,14 @@ const Login = () => {
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
-
+            console.log(roles)
             setAuth({ email, password, roles, accessToken });
             setEmail('');
             setPassword('');
 
             navigate(from, { replace: true });
         } catch (err) {
+            console.error(err)
             if (!err?.response) {
                 setError('No Server Response');
             } else if (err.response?.status === 400) {

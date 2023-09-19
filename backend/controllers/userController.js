@@ -12,8 +12,10 @@ const loginUser = async (req, res) => {
       return res.sendStatus(400).json({ 'message': 'All fields required.'});
 
     const user = await User.findOne({ email: email }).exec();
-    if (!user) 
-      return res.sendStatus(401); //Unauthorized 
+    if (!user) {
+      console.log("failed login")
+        return res.sendStatus(401); //Unauthorized 
+    }
     // evaluate password 
     const match = await bcrypt.compare(password, user.password);
     

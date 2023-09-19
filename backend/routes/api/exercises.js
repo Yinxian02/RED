@@ -1,13 +1,15 @@
 const router = require('express').Router();
 let Exercise = require('../../models/exercise.model');
+const ROLES_LIST = require('../../config/rolesList');
+const verifyRoles = require('../../middleware/verifyRoles');
 
-router.route('/').get((req, res) => {
-  Exercise.find()
+router.route('/').get(verifyRoles(ROLES_LIST.Admin), async (req, res) => {
+  await Exercise.find()
     .then(exercises => res.json(exercises))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route('/add').post(verifyRoles(ROLES_LIST.Admin),(req, res) => {
   const title = req.body.title;
   const creator = req.body.creator;
   const age = req.body.age;
@@ -37,19 +39,19 @@ router.route('/add').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').get((req, res) => {
+router.route('/:id').get(verifyRoles(ROLES_LIST.Admin),(req, res) => {
   Exercise.findById(req.params.id)
     .then(exercise => res.json(exercise))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
+router.route('/:id').delete(verifyRoles(ROLES_LIST.Admin),(req, res) => {
   Exercise.findByIdAndDelete(req.params.id)
     .then(() => res.json('Exercise deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
+router.route('/update/:id').post(verifyRoles(ROLES_LIST.Admin),(req, res) => {
   Exercise.findById(req.params.id)
     .then(exercise => {
       exercise.title = req.body.title;
