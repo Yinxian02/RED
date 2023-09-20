@@ -1,8 +1,8 @@
 const verifyRoles = (...allowedRoles) => {
     return (req, res, next) => {
-        // console.log(req.query.roles)
-        const rolesQuery = req.query.roles
-        if (!req?.query.roles) {
+        console.log(req.roles)
+        const rolesQuery = req.roles
+        if (!req?.roles) {
             // console.log("verification failed");
             return res.sendStatus(401);
         }

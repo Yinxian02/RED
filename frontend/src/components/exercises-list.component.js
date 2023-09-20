@@ -39,9 +39,9 @@ export default class ExercisesList extends Component {
     // console.log(auth.roles)
     const roles = auth.roles
       axios.get('http://localhost:5001/exercises/', {
-      params: {
-        roles: roles 
-      },
+      // params: {
+      //   roles: roles 
+      // },
         headers: {
           Authorization: 'Bearer ' + this.context.auth.accessToken,
       } 
@@ -55,7 +55,17 @@ export default class ExercisesList extends Component {
 }
 
   deleteExercise(id) {
-    axios.delete('http://localhost:5001/exercises/'+id)
+    const {auth} = this.context; 
+    // console.log(auth.roles)
+    const roles = auth.roles
+    axios.delete('http://localhost:5001/exercises/'+id, {
+      params: {
+        roles: roles 
+      },
+        headers: {
+          Authorization: 'Bearer ' + this.context.auth.accessToken,
+      } 
+    })
       .then(response => { console.log(response.data)});
 
     this.setState({

@@ -9,17 +9,17 @@ router.route('/').get(verifyRoles(ROLES_LIST.Admin), async (req, res) => {
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post(verifyRoles(ROLES_LIST.Admin),(req, res) => {
-  const title = req.body.title;
-  const creator = req.body.creator;
-  const age = req.body.age;
-  const number = req.body.number;
-  const durationHours = Number(req.body.durationHours);
-  const durationMins = Number(req.body.durationMins);
-  const materials = req.body.materials;
-  const instructions = req.body.instructions;
-  const youtube = req.body.youtube;
-  const picture = req.body.picture;
+router.route('/add').post(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),(req, res) => {
+  const title = req.body.exercise.title;
+  const creator = req.body.exercise.creator;
+  const age = req.body.exercise.age;
+  const number = req.body.exercise.number;
+  const durationHours = Number(req.body.exercise.durationHours);
+  const durationMins = Number(req.body.exercise.durationMins);
+  const materials = req.body.exercise.materials;
+  const instructions = req.body.exercise.instructions;
+  const youtube = req.body.exercise.youtube;
+  const picture = req.body.exercise.picture;
 
   const newExercise = new Exercise({
     title,
@@ -39,7 +39,7 @@ router.route('/add').post(verifyRoles(ROLES_LIST.Admin),(req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').get(verifyRoles(ROLES_LIST.Admin),(req, res) => {
+router.route('/:id').get(verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),(req, res) => {
   Exercise.findById(req.params.id)
     .then(exercise => res.json(exercise))
     .catch(err => res.status(400).json('Error: ' + err));

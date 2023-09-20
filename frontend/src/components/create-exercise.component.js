@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import AuthContext from "../context/AuthContext";
 
 export default class CreateExercise extends Component {
+  static contextType = AuthContext;
   constructor(props) {
     super(props);
 
@@ -100,6 +102,9 @@ export default class CreateExercise extends Component {
   }
 
   onSubmit(e) {
+    const {auth} = this.context; 
+    console.log(auth.roles)
+    const roles = auth.roles
     e.preventDefault();
 
     const exercise = {
@@ -117,8 +122,21 @@ export default class CreateExercise extends Component {
 
     console.log(exercise);
 
-    axios.post('http://localhost:5001/exercises/add', exercise)
-      .then(res => console.log(res.data));
+
+    axios.post('http://localhost:5001/exercises/add',
+          JSON.stringify({ exercise }), {
+            headers: { 
+              'Content-Type': 'application/json' ,
+              Authorization: 'Bearer ' + this.context.auth.accessToken,
+            },
+          }
+      ).then(res => console.log(res.data));;
+      // console.log(JSON.stringify(response));
+      // console.log(JSON.stringify(response?.data));
+
+
+    // axios.post('http://localhost:5001/exercises/add', exercise)
+    //   .then(res => console.log(res.data));
 
     // window.location = '/admin';
   }
@@ -153,6 +171,15 @@ export default class CreateExercise extends Component {
               className="form-control"
               value={this.state.age}
               onChange={this.onChangeAge}
+              />
+        </div>
+        <div className="form-group">
+          <label>Number of students: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={this.state.number}
+              onChange={this.onChangeNumber}
               />
         </div>
         <div className="form-group">
