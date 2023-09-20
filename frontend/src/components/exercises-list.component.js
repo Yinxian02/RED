@@ -39,9 +39,6 @@ export default class ExercisesList extends Component {
     // console.log(auth.roles)
     const roles = auth.roles
       axios.get('http://localhost:5001/exercises/', {
-      // params: {
-      //   roles: roles 
-      // },
         headers: {
           Authorization: 'Bearer ' + this.context.auth.accessToken,
       } 

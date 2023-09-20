@@ -6,7 +6,6 @@ export default class CreateExercise extends Component {
   static contextType = AuthContext;
   constructor(props) {
     super(props);
-
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeCreator = this.onChangeCreator.bind(this);
     this.onChangeAge = this.onChangeAge.bind(this);
@@ -131,12 +130,6 @@ export default class CreateExercise extends Component {
             },
           }
       ).then(res => console.log(res.data));;
-      // console.log(JSON.stringify(response));
-      // console.log(JSON.stringify(response?.data));
-
-
-    // axios.post('http://localhost:5001/exercises/add', exercise)
-    //   .then(res => console.log(res.data));
 
     // window.location = '/admin';
   }
@@ -253,3 +246,4 @@ export default class CreateExercise extends Component {
     )
   }
 }
+
