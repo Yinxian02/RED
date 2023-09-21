@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker'; // Make sure you have this import
 import "react-datepicker/dist/react-datepicker.css";
+import AuthContext from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function EditExercise() {
+  const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
   const { id } = useParams();
   const [exercise, setExercise] = useState({
     title: '',
@@ -21,7 +25,13 @@ function EditExercise() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/exercises/${id}`)
+      .get(`http://localhost:5001/exercises/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + auth.accessToken,
+          },
+        }
+      )
       .then((response) => {
         const data = response.data;
         setExercise({
@@ -131,10 +141,20 @@ function EditExercise() {
     console.log(updatedExercise);
 
     axios
-      .post(`http://localhost:5001/exercises/update/${id}`, updatedExercise)
-      .then((res) => console.log(res.data));
+      .post(
+        `http://localhost:5001/exercises/update/${id}`, 
+        updatedExercise,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + auth.accessToken,
+          },
+        })
+      .then((res) => {
+        console.log(res.data)
+        navigate('/admin/exercises-list', { replace: true });
+      });
 
-    window.location = '/admin';
   };
 
   return (
@@ -224,7 +244,7 @@ function EditExercise() {
               type="file" 
               accept=".jpeg, .png, .jpg"
               className="form-control"
-              // value={this.state.picture}
+              // value={exercise.picture}
               onChange={onChangePicture}
               />
         </div>

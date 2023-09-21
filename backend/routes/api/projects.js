@@ -10,13 +10,13 @@ router.route('/').get(verifyRoles(ROLES_LIST.Admin), async(req, res) => {
 });
 
 router.route('/add').post(verifyRoles(ROLES_LIST.Admin), (req, res) => {
-  const projectName = req.body.projectName;
-  const year = Number(req.body.year);
-  const location = req.body.location;
-  const description = req.body.description;
-  const picture = req.body.picture;
-  const youtube = req.body.youtube; 
-  const report = req.body.report; 
+  const projectName = req.body.project.projectName;
+  const year = Number(req.body.project.year);
+  const location = req.body.project.location;
+  const description = req.body.project.description;
+  const picture = req.body.project.picture;
+  const youtube = req.body.project.youtube; 
+  const report = req.body.project.report; 
 
   const newProject = new Project({
     projectName,
@@ -27,7 +27,7 @@ router.route('/add').post(verifyRoles(ROLES_LIST.Admin), (req, res) => {
     youtube,
     report,
   });
-
+  // console.log(newProject)
   newProject.save()
   .then(() => res.json('Project added!'))
   .catch(err => res.status(400).json('Error: ' + err));

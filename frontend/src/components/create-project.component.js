@@ -1,20 +1,14 @@
-import React, { Component } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import AuthContext from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-export default class CreateProject extends Component {
-  constructor(props) {
-    super(props);
+export default function CreateProject() {
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
-    this.onChangeProjectName = this.onChangeProjectName.bind(this);
-    this.onChangeYear = this.onChangeYear.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangePicture = this.onChangePicture.bind(this);
-    this.onChangeYoutube = this.onChangeYoutube.bind(this);
-    this.onChangeReport = this.onChangeReport.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  const { auth } = useContext(AuthContext);
 
-    this.state = {
+  const [project, setProject] = useState({
       projectName: '',
       year: 0,
       location: '',
@@ -22,39 +16,38 @@ export default class CreateProject extends Component {
       picture: '',
       youtube: '', 
       report: ''
-    }
-  }
+  }); 
 
-  onChangeProjectName(e) {
-    this.setState({
+  const onChangeProjectName = (e) => {
+    setProject({...project,
       projectName: e.target.value
     })
   }
 
-  onChangeYear(e) {
-    this.setState({
+  const onChangeYear = (e) => {
+    setProject({...project,
       year: e.target.value
     })
   }
 
-  onChangeLocation(e) {
-    this.setState({
+  const onChangeLocation = (e) => {
+    setProject({...project,
       location: e.target.value
     })
   }
 
-  onChangeDescription(e) {
-    this.setState({
+  const onChangeDescription = (e) => {
+    setProject({...project,
       description: e.target.value
     })
   }
 
-  onChangePicture(e) {
+  const onChangePicture = (e) => {
     var fileReader = new FileReader();
     fileReader.readAsDataURL(e.target.files[0]);
     fileReader.onload = () => {
       console.log(fileReader.result)
-      this.setState({
+      setProject({...project,
         picture: fileReader.result,
       })
     };
@@ -63,52 +56,53 @@ export default class CreateProject extends Component {
     }
   }
 
-  onChangeYoutube(e) {
-    this.setState({
+  const onChangeYoutube = (e) => {
+    setProject({...project,
       youtube: e.target.value
     })
   }
 
-  onChangeReport(e) {
-    this.setState({
+  const onChangeReport = (e) => {
+    setProject({...project,
       report: e.target.value
     })
   }
 
 
-  onSubmit(e) {
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    const project = {
-      projectName: this.state.projectName ,
-      year: this.state.year ,
-      location: this.state.location ,
-      description: this.state.description ,
-      picture: this.state.picture ,
-      youtube: this.state.youtube ,
-      report: this.state.report ,
-    }
-
-    console.log(project);
-
-    axios.post('http://localhost:5001/projects/add', project)
-      .then(res => console.log(res.data));
-
-    window.location = '/admin';
+    axios.post(
+      'http://localhost:5001/projects/add', 
+      JSON.stringify({ project }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.accessToken,
+        },
+      }
+      )
+      .then(res => {
+        console.log(res.data);
+        navigate('/admin/projects-list', { replace: true });
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+      });
   }
 
-  render() {
-    return (
+return (
     <div>
       <h3>Create New Project Log</h3>
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="form-group"> 
           <label>Project Name: </label>
           <input type="text"
               required
               className="form-control"
-              value={this.state.projectName}
-              onChange={this.onChangeProjectName}
+              value={project.projectName}
+              onChange={onChangeProjectName}
               />
         </div>
 
@@ -117,8 +111,8 @@ export default class CreateProject extends Component {
           <input 
               type="text" 
               className="form-control"
-              value={this.state.year}
-              onChange={this.onChangeYear}
+              value={project.year}
+              onChange={onChangeYear}
               />
         </div>
 
@@ -127,8 +121,8 @@ export default class CreateProject extends Component {
           <input 
               type="text" 
               className="form-control"
-              value={this.state.location}
-              onChange={this.onChangeLocation}
+              value={project.location}
+              onChange={onChangeLocation}
               />
         </div>
 
@@ -137,8 +131,8 @@ export default class CreateProject extends Component {
           <input  type="text"
               required
               className="form-control"
-              value={this.state.description}
-              onChange={this.onChangeDescription}
+              value={project.description}
+              onChange={onChangeDescription}
               />
         </div>
 
@@ -149,7 +143,7 @@ export default class CreateProject extends Component {
               accept=".jpeg, .png, .jpg"
               className="form-control"
               // value={this.state.picture}
-              onChange={this.onChangePicture}
+              onChange={onChangePicture}
               />
         </div>
 
@@ -158,8 +152,8 @@ export default class CreateProject extends Component {
           <input 
               type="text" 
               className="form-control"
-              value={this.state.youtube}
-              onChange={this.onChangeYoutube}
+              value={project.youtube}
+              onChange={onChangeYoutube}
               />
         </div>
 
@@ -168,8 +162,8 @@ export default class CreateProject extends Component {
           <input 
               type="text" 
               className="form-control"
-              value={this.state.report}
-              onChange={this.onChangeReport}
+              value={project.report}
+              onChange={onChangeReport}
               />
         </div>
 
@@ -178,7 +172,7 @@ export default class CreateProject extends Component {
         </div>
       </form>
     </div>
-    )
-  }
+);
 }
+
 

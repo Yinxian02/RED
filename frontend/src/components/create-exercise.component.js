@@ -93,8 +93,6 @@ export default function CreateExercise() {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    const roles = auth.roles;
-
     axios
       .post(
         'http://localhost:5001/exercises/add',

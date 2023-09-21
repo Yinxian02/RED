@@ -35,7 +35,7 @@ export default class ProjectsList extends Component {
       headers: {
         Authorization: 'Bearer ' + this.context.auth.accessToken,
         } 
-    })
+      })
       .then(response => {
         this.setState({ projects: response.data })
       })
@@ -45,7 +45,11 @@ export default class ProjectsList extends Component {
   }
 
   deleteProject(id) {
-    axios.delete('http://localhost:5001/projects/'+id)
+    axios.delete('http://localhost:5001/projects/'+id, {
+      headers: {
+        Authorization: 'Bearer ' + this.context.auth.accessToken,
+    } 
+    })
       .then(response => { console.log(response.data)});
 
     this.setState({
