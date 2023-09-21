@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import DatePicker from 'react-datepicker'; // Make sure you have this import
+// import DatePicker from 'react-datepicker'; // Make sure you have this import
 import "react-datepicker/dist/react-datepicker.css";
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -186,6 +186,15 @@ function EditExercise() {
               className="form-control"
               value={exercise.age}
               onChange={onChangeAge}
+              />
+        </div>
+        <div className="form-group">
+          <label>Number of students: </label>
+          <input 
+              type="text" 
+              className="form-control"
+              value={exercise.number}
+              onChange={onChangeNumber}
               />
         </div>
         <div className="form-group">

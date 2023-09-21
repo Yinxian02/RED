@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
 
 function EditProject() {
   const navigate = useNavigate();
@@ -108,7 +107,7 @@ function EditProject() {
         },
       })
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         navigate('/admin/projects-list', { replace: true });
       });
   };

@@ -1,21 +1,22 @@
 const router = require('express').Router();
 let Fundraiser = require('../../models/fundraiser.model');
+const ROLES_LIST = require('../../config/rolesList');
+const verifyRoles = require('../../middleware/verifyRoles');
 
-router.route('/').get((req, res) => {
+router.route('/').get(verifyRoles(ROLES_LIST.Admin), async(req, res) => {
   Fundraiser.find()
     .then(fundraiser => res.json(fundraiser))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
-  const fundraiserName = req.body.fundraiserName;
-  const date = Date.parse(req.body.date);
-  const location = req.body.location;
-  const description = req.body.description;
-  const poster = req.body.poster;
-  const instagram = req.body.instagram;
-  const signUp = req.body.signUp; 
-  const addToCalendar = req.body.addToCalendar; 
+router.route('/add').post(verifyRoles(ROLES_LIST.Admin), (req, res) => {
+  console.log(req.body.fundraiser)
+  const fundraiserName = req.body.fundraiser.fundraiserName;
+  const date = Date.parse(req.body.fundraiser.date);
+  const location = req.body.fundraiser.location;
+  const description = req.body.fundraiser.description;
+  const poster = req.body.fundraiser.poster;
+  const signUp = req.body.fundraiser.signUp; 
 
   const newFundraiser = new Fundraiser({
     fundraiserName,
@@ -23,9 +24,7 @@ router.route('/add').post((req, res) => {
     location,
     description,
     poster, 
-    instagram,
     signUp,
-    addToCalendar,
   });
 
   newFundraiser.save()
@@ -33,19 +32,19 @@ router.route('/add').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').get((req, res) => {
+router.route('/:id').get(verifyRoles(ROLES_LIST.Admin), (req, res) => {
     Fundraiser.findById(req.params.id)
     .then(fundraiser => res.json(fundraiser))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
+router.route('/:id').delete(verifyRoles(ROLES_LIST.Admin), (req, res) => {
     Fundraiser.findByIdAndDelete(req.params.id)
     .then(() => res.json('Fundraiser deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
+router.route('/update/:id').post(verifyRoles(ROLES_LIST.Admin), (req, res) => {
     Fundraiser.findById(req.params.id)
     .then(fundraiser => {
         fundraiser.fundraiserName = req.body.fundraiserName;

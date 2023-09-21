@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import AuthContext from "../context/AuthContext";
+
 const Fundraiser = props => (
   <tr>
     <td>{props.fundraiser.fundraiserName}</td>
@@ -10,7 +12,6 @@ const Fundraiser = props => (
     <td>{props.fundraiser.description}</td>
     <td><img width="100" src={props.fundraiser.poster} alt="error"/></td>
     <td>{props.fundraiser.signUp}</td>
-    {/* <td>{props.fundraiser.addToCalendar}</td> */}
     <td>
       <Link to={"/admin/edit-fundraiser/"+props.fundraiser._id}>edit</Link> | <a href="#" onClick={() => { props.deleteFundraiser(props.fundraiser._id) }}>delete</a>
     </td>
@@ -18,6 +19,8 @@ const Fundraiser = props => (
 )
 
 export default class FundraisersList extends Component {
+  static contextType = AuthContext;
+
   constructor(props) {
     super(props);
 
@@ -27,7 +30,11 @@ export default class FundraisersList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5001/fundraisers/')
+    axios.get('http://localhost:5001/fundraisers/', {
+      headers: {
+          Authorization: 'Bearer ' + this.context.auth.accessToken,
+      } 
+    })
       .then(response => {
         this.setState({ fundraisers: response.data })
       })
@@ -37,8 +44,11 @@ export default class FundraisersList extends Component {
   }
 
   deleteFundraiser(id) {
-    axios.delete('http://localhost:5001/fundraisers/'+id)
-      .then(response => { console.log(response.data)});
+    axios.delete('http://localhost:5001/fundraisers/'+id, {
+      headers: {
+        Authorization: 'Bearer ' + this.context.auth.accessToken,
+      } 
+    }).then(response => { console.log(response.data)});
 
     this.setState({
       fundraisers: this.state.fundraisers.filter(el => el._id !== id)

@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DatePicker from 'react-datepicker'; // Make sure you have this import
 import "react-datepicker/dist/react-datepicker.css";
+import AuthContext from '../context/AuthContext';
 
 function EditFundraiser() {
+  const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
+
   const { id } = useParams();
   const [fundraiser, setFundraiser] = useState({
     fundraiserName: '',
@@ -13,12 +17,16 @@ function EditFundraiser() {
     description: '',
     poster: '',
     signUp: '', 
-    // addToCalendar: ''
   });
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/fundraisers/${id}`)
+      .get(`http://localhost:5001/fundraisers/${id}`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.accessToken,
+        },
+      })
       .then((response) => {
         const data = response.data;
         setFundraiser({
@@ -27,14 +35,12 @@ function EditFundraiser() {
           location: data.location ,
           description: data.description ,
           poster: data.poster ,
-          signUp: data.signUp ,
-          // addToCalendar: data.addToCalendar ,
+          signUp: data.signUp 
         });
       })
       .catch((error) => {
         console.log(error);
       });
-
   }, [id]);
 
   const onChangeFundraiserName = (e) => {
@@ -69,12 +75,6 @@ function EditFundraiser() {
     setFundraiser({ ...fundraiser, signUp: e.target.value });
   };
 
-  // const onChangeAddToCalendar = (e) => {
-  //   setFundraiser({ ...fundraiser, addToCalendar: e.target.value });
-  // };
-
-  
-
   const onSubmit = (e) => {
     e.preventDefault();
 
@@ -85,16 +85,23 @@ function EditFundraiser() {
       description: fundraiser.description ,
       poster: fundraiser.poster ,
       signUp: fundraiser.signUp ,
-      // addToCalendar: fundraiser.addToCalendar ,
     };
 
     console.log(updatedFundraiser);
 
     axios
-      .post(`http://localhost:5001/fundraisers/update/${id}`, updatedFundraiser)
-      .then((res) => console.log(res.data));
-
-    window.location = '/admin';
+      .post(`http://localhost:5001/fundraisers/update/${id}`, 
+      updatedFundraiser,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        navigate('/admin/fundraisers-list', { replace: true });
+      });
   };
 
   return (

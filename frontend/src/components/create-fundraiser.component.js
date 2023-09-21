@@ -1,64 +1,55 @@
-import React, { Component } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import AuthContext from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
-export default class CreateFundraiser extends Component {
-  constructor(props) {
-    super(props);
+export default function CreateFundraiser() {
+  const navigate = useNavigate(); // Initialize the useNavigate hook
 
-    this.onChangeFundraiserName = this.onChangeFundraiserName.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
-    this.onChangeLocation = this.onChangeLocation.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onChangePoster = this.onChangePoster.bind(this);
-    // this.onChangeInstagram = this.onChangeInstagram.bind(this);
-    this.onChangeSignUp = this.onChangeSignUp.bind(this);
-    // this.onChangeAddToCalendar = this.onChangeAddToCalendar.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+  const { auth } = useContext(AuthContext);
 
-    this.state = {
+  const [fundraiser, setFundraiser] = useState({
       fundraiserName: '',
       date: new Date(),
       location: '',
       description: '',
       poster: '',
-    //   instagram: '', 
-      signUp: '', 
-      // addToCalendar: false, 
-    }
-  }
+      signUp: ''
+  });
+  
 
-  onChangeFundraiserName(e) {
-    this.setState({
+  const onChangeFundraiserName = (e) => {
+    setFundraiser({...fundraiser,
       fundraiserName: e.target.value
     })
   }
 
-  onChangeDate(date) {
-    this.setState({
+  const onChangeDate = (date) => {
+    setFundraiser({...fundraiser,
       date: date
     })
   }
 
-  onChangeLocation(e) {
-    this.setState({
+  const onChangeLocation = (e) => {
+    setFundraiser({...fundraiser,
       location: e.target.value
     })
   }
 
-  onChangeDescription(e) {
-    this.setState({
+  const onChangeDescription = (e) => {
+    setFundraiser({...fundraiser,
       description: e.target.value
     })
   }
 
-  onChangePoster(e) {
+  const onChangePoster = (e) => {
     var fileReader = new FileReader();
     fileReader.readAsDataURL(e.target.files[0]);
     fileReader.onload = () => {
       console.log(fileReader.result)
-      this.setState({
+      setFundraiser({...fundraiser,
         poster: fileReader.result,
       })
     };
@@ -67,66 +58,56 @@ export default class CreateFundraiser extends Component {
     }
   }
 
-//   onChangeInstagram(e) {
-//     this.setState({
-//       instagram: e.target.value
-//     })
-//   }
 
-  onChangeSignUp(e) {
-    this.setState({
+  const onChangeSignUp = (e) => {
+    setFundraiser({...fundraiser,
       signUp: e.target.value
     })
   }
 
-  // onChangeAddToCalendar(e) {
-  //   this.setState({
-  //     addToCalendar: e.target.value
-  //   })
-  // }
-
-  onSubmit(e) {
+  const onSubmit = (e) => {
     e.preventDefault();
 
-    const fundraiser = {
-        fundraiserName: this.state.fundraiserName ,
-        date: this.state.date ,
-        location: this.state.location ,
-        description: this.state.description ,
-        poster: this.state.poster ,
-        // instagram: this.state.instagram ,
-        signUp: this.state.signUp ,
-        // addToCalendar: this.state.addToCalendar ,
-    }
-
-    console.log(fundraiser);
-
-    axios.post('http://localhost:5001/fundraisers/add', fundraiser)
-      .then(res => console.log(res.data));
-
-    window.location = '/admin';
+    axios
+      .post(
+        'http://localhost:5001/fundraisers/add', 
+      JSON.stringify({ fundraiser }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.accessToken,
+        },
+      }
+      ).then(res => {
+        console.log(res.data)
+        navigate('/admin/fundraisers-list', { replace: true });
+      })
+      .catch((error) => {
+        // Handle errors here
+        console.error(error);
+      });
   }
 
-  render() {
+  
     return (
     <div>
       <h3>Create New Fundraiser Log</h3>
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="form-group"> 
           <label>Fundraiser Name: </label>
           <input type="text"
               required
               className="form-control"
-              value={this.state.fundraiserName}
-              onChange={this.onChangeFundraiserName}
+              value={fundraiser.fundraiserName}
+              onChange={onChangeFundraiserName}
               />
         </div>
         <div className="form-group">
           <label>Date: </label>
           <div>
             <DatePicker
-              selected={this.state.date}
-              onChange={this.onChangeDate}
+              selected={fundraiser.date}
+              onChange={onChangeDate}
             />
           </div>
         </div>
@@ -136,8 +117,8 @@ export default class CreateFundraiser extends Component {
           <input 
               type="text" 
               className="form-control"
-              value={this.state.location}
-              onChange={this.onChangeLocation}
+              value={fundraiser.location}
+              onChange={onChangeLocation}
               />
         </div>
 
@@ -146,8 +127,8 @@ export default class CreateFundraiser extends Component {
           <input  type="text"
               required
               className="form-control"
-              value={this.state.description}
-              onChange={this.onChangeDescription}
+              value={fundraiser.description}
+              onChange={onChangeDescription}
               />
         </div>
 
@@ -158,39 +139,19 @@ export default class CreateFundraiser extends Component {
               accept=".jpeg, .png, .jpg"
               className="form-control"
               // value={this.state.picture}
-              onChange={this.onChangePoster}
+              onChange={onChangePoster}
               />
         </div>
-
-        {/* <div className="form-group">
-          <label>Instagram: </label>
-          <input 
-              type="text" 
-              className="form-control"
-              value={this.state.instagram}
-              onChange={this.onChangeInstagram}
-              />
-        </div> */}
 
         <div className="form-group">
           <label>Sign Up: </label>
           <input 
               type="text" 
               className="form-control"
-              value={this.state.signUp}
-              onChange={this.onChangeSignUp}
+              value={fundraiser.signUp}
+              onChange={onChangeSignUp}
               />
         </div>
-
-        {/* <div className="form-group">
-          <label>Add to Calendar: </label>
-          <input 
-              type="checkbox" 
-              className="form-control"
-              value={this.state.addToCalendar}
-              onChange={this.onChangeAddToCalendar}
-              />
-        </div> */}
 
         <div className="form-group">
           <input type="submit" value="Create Fundraiser Log" className="btn btn-primary" />
@@ -199,4 +160,4 @@ export default class CreateFundraiser extends Component {
     </div>
     )
   }
-}
+
