@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+import AuthContext from "../context/AuthContext";
+
 const Project = props => (
   <tr>
     <td>{props.project.projectName}</td>
@@ -18,6 +20,7 @@ const Project = props => (
 )
 
 export default class ProjectsList extends Component {
+  static contextType = AuthContext;
   constructor(props) {
     super(props);
 
@@ -27,7 +30,11 @@ export default class ProjectsList extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5001/projects/')
+    axios.get('http://localhost:5001/projects/', {
+      headers: {
+        Authorization: 'Bearer ' + this.context.auth.accessToken,
+        } 
+    })
       .then(response => {
         this.setState({ projects: response.data })
       })

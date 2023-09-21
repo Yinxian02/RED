@@ -20,21 +20,21 @@ app.use(express.json());
 app.use(cookieParser());
 
 const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true}
-);
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true});
+
 const connection = mongoose.connection;
 connection.once('open', () => {
   console.log("MongoDB database connection established successfully");
 })
 
 // routes
+app.use('/signup', require('./routes/signup'));
 app.use('/auth', require('./routes/auth'));
 app.use('/refresh', require('./routes/refresh'));
 app.use('/logout', require('./routes/logout'));
-app.use('/signup', require('./routes/signup'));
 
 app.use(requireAuth);
-app.use('/users', require('./routes/api/users'));
+// app.use('/users', require('./routes/api/users'));
 app.use('/exercises', require('./routes/api/exercises'));
 app.use('/projects', require('./routes/api/projects')); 
 app.use('/fundraisers', require('./routes/api/fundraisers')); 

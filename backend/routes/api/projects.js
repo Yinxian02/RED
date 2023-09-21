@@ -1,13 +1,15 @@
 const router = require('express').Router();
 let Project = require('../../models/project.model');
+const ROLES_LIST = require('../../config/rolesList');
+const verifyRoles = require('../../middleware/verifyRoles');
 
-router.route('/').get((req, res) => {
+router.route('/').get(verifyRoles(ROLES_LIST.Admin), async(req, res) => {
   Project.find()
     .then(project => res.json(project))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/add').post((req, res) => {
+router.route('/add').post(verifyRoles(ROLES_LIST.Admin), (req, res) => {
   const projectName = req.body.projectName;
   const year = Number(req.body.year);
   const location = req.body.location;
@@ -31,19 +33,19 @@ router.route('/add').post((req, res) => {
   .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').get((req, res) => {
+router.route('/:id').get(verifyRoles(ROLES_LIST.Admin), (req, res) => {
     Project.findById(req.params.id)
     .then(project => res.json(project))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/:id').delete((req, res) => {
+router.route('/:id').delete(verifyRoles(ROLES_LIST.Admin), (req, res) => {
     Project.findByIdAndDelete(req.params.id)
     .then(() => res.json('Project deleted.'))
     .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req, res) => {
+router.route('/update/:id').post(verifyRoles(ROLES_LIST.Admin), (req, res) => {
     Project.findById(req.params.id)
     .then(project => {
         project.projectName = req.body.projectName;

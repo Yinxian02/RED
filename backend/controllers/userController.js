@@ -53,7 +53,6 @@ const loginUser = async (req, res) => {
       res.json({ roles, accessToken });
   }
 }
-
 // signup a user
 const signupUser = async (req, res) => {
   const { email, password } = req.body;
@@ -68,20 +67,23 @@ const signupUser = async (req, res) => {
     try {
         //encrypt the password
         const hashedPassword = await bcrypt.hash(password, 10);
-
+        // console.log(email)
         //create and store the new user
+        // await connectToDatabase();
         const result = await User.create({
-            "email": email,
-            "password": hashedPassword
-        });
-
+          "email": email,
+          "password": hashedPassword
+        }
+        );
         console.log(result);
 
-        res.status(201).json({ 'success': `New user ${email} created!` });
+        // res.status(201).json({ 'success': `New user ${email} created!` });
     } catch (err) {
+        console.error('Error:', err);
         res.status(500).json({ 'message': err.message });
     }
 }
+
 
 // logout a user
 const logoutUser = async (req, res) => {

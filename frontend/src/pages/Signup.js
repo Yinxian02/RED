@@ -8,7 +8,7 @@ const EMAIL_REGEX = /^[A-Za-z0-9_!#$%&'*+=?`{|}~^.-]+@[A-Za-z0-9.-]+$/gm;
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const REGISTER_URL = '/signup';
 
-const Register = () => {
+const Signup = () => {
     const userRef = useRef();
     const errRef = useRef();
 
@@ -54,13 +54,16 @@ const Register = () => {
             return;
         }
         try {
+            console.log(JSON.stringify({ email, password }))
             const response = await axios.post(REGISTER_URL,
                 JSON.stringify({ email, password }),
                 {
                     headers: { 'Content-Type': 'application/json' },
-                    withCredentials: true
+                    mode: 'cors',
+                    withCredentials: true,
                 }
             );
+            console.log('hi')
             // TODO: remove console.logs before deployment
             console.log(JSON.stringify(response?.data));
             //console.log(JSON.stringify(response))
@@ -182,4 +185,4 @@ const Register = () => {
     )
 }
 
-export default Register
+export default Signup

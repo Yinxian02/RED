@@ -50,6 +50,7 @@ function App() {
             <Route path='/follow-us' element={<FollowUs/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/signup' element={<Signup/>}/>
+            
             <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
               <Route path='admin' element={<Admin/>}>
                 <Route path='exercises-list' element={<ExercisesList/>}/> 
