@@ -21,6 +21,7 @@ const Project = props => (
 
 export default class ProjectsList extends Component {
   static contextType = AuthContext;
+  
   constructor(props) {
     super(props);
 
