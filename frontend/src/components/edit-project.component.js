@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import AuthContext from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 function EditProject() {
+  const navigate = useNavigate();
+  const { auth } = useContext(AuthContext);
+
   const { id } = useParams();
   const [project, setProject] = useState({
     projectName: '',
@@ -16,7 +21,12 @@ function EditProject() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5001/projects/${id}`)
+      .get(`http://localhost:5001/projects/${id}`, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + auth.accessToken,
+          },
+        })
       .then((response) => {
         const data = response.data;
         setProject({
@@ -89,10 +99,18 @@ function EditProject() {
     console.log(updatedProject);
 
     axios
-      .post(`http://localhost:5001/projects/update/${id}`, updatedProject)
-      .then((res) => console.log(res.data));
-
-    window.location = '/admin';
+      .post(`http://localhost:5001/projects/update/${id}`, 
+      updatedProject,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + auth.accessToken,
+        },
+      })
+      .then((res) => {
+        console.log(res.data)
+        navigate('/admin/projects-list', { replace: true });
+      });
   };
 
   return (

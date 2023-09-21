@@ -55,14 +55,16 @@ function App() {
               <Route path='admin' element={<Admin/>}>
                 <Route path='exercises-list' element={<ExercisesList/>}/> 
                 <Route path='create-exercise' element={<CreateExercise/>}/> 
+                <Route path= 'edit-exercise/:id' element={<EditExercise/>} />
+                
                 <Route path='projects-list' element={<ProjectsList/>}/> 
                 <Route path='create-project' element={<CreateProject/>}/> 
+                <Route path= 'edit-project/:id' element={<EditProject/>} />
+                
                 <Route path='fundraisers-list' element={<FundraisersList/>}/> 
                 <Route path='create-fundraiser' element={<CreateFundraiser/>}/> 
+                <Route path= 'edit-fundraiser/:id' element={<EditFundraiser/>} />
               </Route>
-              <Route path= '/admin/edit-exercise/:id' element={<EditExercise/>} />
-              <Route path= '/admin/edit-project/:id' element={<EditProject/>} />
-              <Route path= '/admin/edit-fundraiser/:id' element={<EditFundraiser/>} />
             </Route>
           </Routes>      
       </Router>
