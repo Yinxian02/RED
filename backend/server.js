@@ -3,6 +3,7 @@ const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials');
 const requireAuth = require("./middleware/requireAuth")
 
 var bodyparser = require("body-parser");
@@ -13,6 +14,8 @@ const port = process.env.PORT || 5001;
 
 app.use(bodyparser.json({limit: '500kb'}));
 // Cross Origin Resource Sharing
+// app.use(credentials);
+
 app.use(cors(corsOptions));
 app.use(express.json());
 
