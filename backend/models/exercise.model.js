@@ -17,6 +17,15 @@ const exerciseSchema = new Schema({
   timestamps: true,
 });
 
+function validatePath(fieldType) {
+  exerciseSchema.path(fieldType).validate((val) => {
+    urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
+    return urlRegex.test(val);
+  }, 'Invalid' + fieldType + 'URL.');
+}
+
+validatePath('youtube');
+
 const Exercise = mongoose.model('Exercise', exerciseSchema);
 
 module.exports = Exercise;

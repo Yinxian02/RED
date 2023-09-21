@@ -13,17 +13,14 @@ const fundraiserSchema = new Schema({
   timestamps: true,
 });
 
-// function validatePath(fieldType) {
-//   fundraiserSchema.path(fieldType).validate((val) => {
-//     urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
-//     return urlRegex.test(val);
-//   }, 'Invalid' + fieldType + 'URL.');
-// }
+function validatePath(fieldType) {
+  fundraiserSchema.path(fieldType).validate((val) => {
+    urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
+    return urlRegex.test(val);
+  }, 'Invalid' + fieldType + 'URL.');
+}
 
-// validatePath('instagram');
-// validatePath('signUp');
-// validatePath('addToCalendar');
-
+validatePath('signUp');
 
 const Fundraiser = mongoose.model('Fundraiser', fundraiserSchema);
 

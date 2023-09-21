@@ -14,16 +14,16 @@ const projectSchema = new Schema({
   timestamps: true,
 });
 
-// function validatePath(fieldType) {
-//   projectSchema.path(fieldType).validate((val) => {
-//     urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
-//     return urlRegex.test(val);
-//   }, 'Invalid' + fieldType + 'URL.');
-// }
+function validatePath(fieldType) {
+  projectSchema.path(fieldType).validate((val) => {
+    urlRegex = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
+    return urlRegex.test(val);
+  }, 'Invalid' + fieldType + 'URL.');
+}
 
 // validatePath('picture');
-// validatePath('youtube');
-// validatePath('report');
+validatePath('youtube');
+validatePath('report');
 
 
 const Project = mongoose.model('Project', projectSchema);
