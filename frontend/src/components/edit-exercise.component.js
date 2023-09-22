@@ -5,11 +5,24 @@ import axios from 'axios';
 import "react-datepicker/dist/react-datepicker.css";
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import validator from 'validator'
 
 function EditExercise() {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
+
+  const validateYT = (value) => {
+    
+    if (validator.isURL(value)) {
+      setYTErrorMessage('')
+    } else {
+      setYTErrorMessage('Invalid URL')
+    }
+  }
+
   const { id } = useParams();
+
+  const [ytErrorMessage, setYTErrorMessage] = useState('')
   const [exercise, setExercise] = useState({
     title: '',
     creator: '',
@@ -104,6 +117,7 @@ function EditExercise() {
   }
 
   const onChangeYoutube = (e) => {
+    validateYT(e.target.value); 
     setExercise({...exercise,
       youtube: e.target.value
     })
@@ -245,6 +259,10 @@ function EditExercise() {
               value={exercise.youtube}
               onChange={onChangeYoutube}
               />
+              <span style={{
+              fontWeight: 'bold',
+              color: 'red',
+              }}>{ytErrorMessage}</span>
         </div>
 
         <div className="form-group">

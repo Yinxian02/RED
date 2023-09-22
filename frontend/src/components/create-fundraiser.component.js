@@ -4,12 +4,23 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import validator from 'validator'
 
 export default function CreateFundraiser() {
   const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const { auth } = useContext(AuthContext);
 
+  const validateSignUp = (value) => {
+    
+    if (validator.isURL(value)) {
+      setErrorMessage('')
+    } else {
+      setErrorMessage('Invalid URL')
+    }
+  }
+
+  const [errorMessage, setErrorMessage] = useState('')
   const [fundraiser, setFundraiser] = useState({
       fundraiserName: '',
       date: new Date(),
@@ -60,6 +71,7 @@ export default function CreateFundraiser() {
 
 
   const onChangeSignUp = (e) => {
+    validateSignUp(e.target.value);
     setFundraiser({...fundraiser,
       signUp: e.target.value
     })
@@ -151,6 +163,10 @@ export default function CreateFundraiser() {
               value={fundraiser.signUp}
               onChange={onChangeSignUp}
               />
+              <span style={{
+              fontWeight: 'bold',
+              color: 'red',
+              }}>{errorMessage}</span>
         </div>
 
         <div className="form-group">

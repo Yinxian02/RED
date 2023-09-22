@@ -2,10 +2,32 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import AuthContext from '../context/AuthContext';
+import validator from 'validator'
 
 function EditProject() {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
+
+  const validateYT = (value) => {
+    
+    if (validator.isURL(value)) {
+      setYTErrorMessage('')
+    } else {
+      setYTErrorMessage('Invalid URL')
+    }
+  }
+
+  const validateReport = (value) => {
+    
+    if (validator.isURL(value)) {
+      setReportErrorMessage('')
+    } else {
+      setReportErrorMessage('Invalid URL')
+    }
+  }
+
+  const [ytErrorMessage, setYTErrorMessage] = useState('')
+  const [reportErrorMessage, setReportErrorMessage] = useState('')
 
   const { id } = useParams();
   const [project, setProject] = useState({
@@ -73,10 +95,12 @@ function EditProject() {
   };
 
   const onChangeYoutube = (e) => {
+    validateYT(e.target.value); 
     setProject({ ...project, youtube: e.target.value });
   };
 
   const onChangeReport = (e) => {
+    validateReport(e.target.value);
     setProject({ ...project, report: e.target.value });
   };
 
@@ -174,6 +198,10 @@ function EditProject() {
               value={project.youtube}
               onChange={onChangeYoutube}
               />
+              <span style={{
+              fontWeight: 'bold',
+              color: 'red',
+              }}>{ytErrorMessage}</span>
         </div>
 
         <div className="form-group">
@@ -184,6 +212,10 @@ function EditProject() {
               value={project.report}
               onChange={onChangeReport}
               />
+              <span style={{
+              fontWeight: 'bold',
+              color: 'red',
+              }}>{reportErrorMessage}</span>
         </div>
 
         

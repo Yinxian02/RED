@@ -2,13 +2,23 @@ import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import AuthContext from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-
+import validator from 'validator'
 
 export default function CreateExercise() {
   const navigate = useNavigate(); // Initialize the useNavigate hook
 
   const { auth } = useContext(AuthContext);
 
+  const validateYT = (value) => {
+    
+    if (validator.isURL(value)) {
+      setYTErrorMessage('')
+    } else {
+      setYTErrorMessage('Invalid URL')
+    }
+  }
+
+  const [ytErrorMessage, setYTErrorMessage] = useState('')
   const [exercise, setExercise] = useState({
     title: '',
     creator: '',
@@ -71,6 +81,7 @@ export default function CreateExercise() {
   }
     
   const onChangeYoutube = (e) =>{
+    validateYT(e.target.value); 
     setExercise({...exercise,
       youtube: e.target.value
     })
@@ -205,6 +216,10 @@ export default function CreateExercise() {
               value={exercise.youtube}
               onChange={onChangeYoutube}
               />
+              <span style={{
+              fontWeight: 'bold',
+              color: 'red',
+              }}>{ytErrorMessage}</span>
         </div>
 
         <div className="form-group">

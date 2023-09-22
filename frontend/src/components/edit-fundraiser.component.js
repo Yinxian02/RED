@@ -4,11 +4,22 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker'; // Make sure you have this import
 import "react-datepicker/dist/react-datepicker.css";
 import AuthContext from '../context/AuthContext';
+import validator from 'validator'
 
 function EditFundraiser() {
   const navigate = useNavigate();
   const { auth } = useContext(AuthContext);
 
+  const validateSignUp = (value) => {
+    
+    if (validator.isURL(value)) {
+      setErrorMessage('')
+    } else {
+      setErrorMessage('Invalid URL')
+    }
+  }
+
+  const [errorMessage, setErrorMessage] = useState('')
   const { id } = useParams();
   const [fundraiser, setFundraiser] = useState({
     fundraiserName: '',
@@ -72,6 +83,7 @@ function EditFundraiser() {
   };
 
   const onChangeSignUp = (e) => {
+    validateSignUp(e.target.value);
     setFundraiser({ ...fundraiser, signUp: e.target.value });
   };
 
@@ -167,17 +179,11 @@ function EditFundraiser() {
               value={fundraiser.signUp}
               onChange={onChangeSignUp}
               />
+              <span style={{
+              fontWeight: 'bold',
+              color: 'red',
+              }}>{errorMessage}</span>
         </div>
-
-        {/* <div className="form-group">
-          <label>Add To Calendar: </label>
-          <input 
-              type="checkbox" 
-              className="form-control"
-              value={fundraiser.addToCalendar}
-              onChange={onChangeAddToCalendar}
-              />
-        </div> */}
 
         
 
