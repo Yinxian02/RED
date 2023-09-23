@@ -113,6 +113,9 @@ function EditFundraiser() {
       .then((res) => {
         console.log(res.data);
         navigate('/admin/fundraisers-list', { replace: true });
+      }).catch((error) => {
+        // Handle errors here
+        console.error(error);
       });
   };
 

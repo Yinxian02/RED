@@ -32,7 +32,7 @@ const refreshToken = async (req, res) => {
                     }
                 },
                 process.env.ACCESS_TOKEN_SECRET,
-                { expiresIn: '100s' }
+                { expiresIn: '30m' }
             );
             res.json({ roles, accessToken })
         }

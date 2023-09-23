@@ -18,9 +18,10 @@ const loginUser = async (req, res) => {
     }
     // evaluate password 
     const match = await bcrypt.compare(password, user.password);
-    
+  
     if (!match) {
-      throw Error("Incorrect password"); 
+      console.log("Incorrect password")
+      return res.sendStatus(402); 
     } else {
 
       const roles = Object.values(user.roles).filter(Boolean);
@@ -43,8 +44,8 @@ const loginUser = async (req, res) => {
       // Saving refreshToken with current user
       user.refreshToken = refreshToken;
       const result = await user.save();
-      console.log(result);
-      console.log(roles);
+      // console.log(result);
+      // console.log(roles);
 
       // Creates Secure Cookie with refresh token
       res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });

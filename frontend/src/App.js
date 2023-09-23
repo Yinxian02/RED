@@ -15,6 +15,7 @@ import JoinUs from './pages/JoinUs'
 import FollowUs from './pages/FollowUs'
 import Admin from './pages/Admin'
 import RequireAuth from './components/RequireAuth';
+import Missing from './pages/Missing';
 
 import ExercisesList from './components/exercises-list.component'
 import CreateExercise from './components/create-exercise.component'
@@ -66,6 +67,8 @@ function App() {
                 <Route path= 'edit-fundraiser/:id' element={<EditFundraiser/>} />
               </Route>
             </Route>
+
+            <Route path="*" element={<Missing />} />
           </Routes>      
       </Router>
     </>

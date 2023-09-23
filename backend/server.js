@@ -1,34 +1,37 @@
+require('dotenv').config();
 const express = require('express');
+const app = express();
+const path = require('path');
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
+const { logger } = require('./middleware/logEvents');
+const errorHandler = require('./middleware/errorHandler');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const credentials = require('./middleware/credentials');
 const requireAuth = require("./middleware/requireAuth")
+const connectDB = require('./config/dbConn');
+const port = process.env.PORT || 5001;
+
+connectDB();
 
 var bodyparser = require("body-parser");
 
-require('dotenv').config();
-const app = express();
-const port = process.env.PORT || 5001;
+
+
+
+app.use(logger);
+app.use(cors(corsOptions));
 
 app.use(bodyparser.json({limit: '500kb'}));
 // Cross Origin Resource Sharing
 // app.use(credentials);
-
-app.use(cors(corsOptions));
 app.use(express.json());
 
 //middleware for cookies
 app.use(cookieParser());
 
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true});
-
-const connection = mongoose.connection;
-connection.once('open', () => {
-  console.log("MongoDB database connection established successfully");
-})
+app.use('/', express.static(path.join(__dirname, '/public')));
 
 // routes
 app.use('/signup', require('./routes/signup'));
@@ -42,6 +45,23 @@ app.use('/exercises', require('./routes/api/exercises'));
 app.use('/projects', require('./routes/api/projects')); 
 app.use('/fundraisers', require('./routes/api/fundraisers')); 
 
+app.all('*', (req, res) => {
+  res.status(404);
+  if (req.accepts('html')) {
+    res.sendFile(path.join(__dirname, 'views', '404.html'));
+  } else if (req.accepts('json')) {
+    res.json({ "error": "404 Not Found" });
+  } else {
+    res.type('txt').send("404 Not Found");
+  }
+});
+
+app.use(errorHandler)
+
+const connection = mongoose.connection;
+connection.once('open', () => {
+  console.log("MongoDB database connection established successfully");
+})
 app.listen(port || 3000, () => {
     console.log(`Server is running on port: ${port}`);
 });

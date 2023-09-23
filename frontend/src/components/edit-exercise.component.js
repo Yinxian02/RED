@@ -167,6 +167,9 @@ function EditExercise() {
       .then((res) => {
         console.log(res.data)
         navigate('/admin/exercises-list', { replace: true });
+      }).catch((error) => {
+        // Handle errors here
+        console.error(error);
       });
 
   };

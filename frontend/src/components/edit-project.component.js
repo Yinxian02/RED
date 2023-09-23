@@ -133,6 +133,9 @@ function EditProject() {
       .then((res) => {
         console.log(res.data);
         navigate('/admin/projects-list', { replace: true });
+      }).catch((error) => {
+        // Handle errors here
+        console.error(error);
       });
   };
 
