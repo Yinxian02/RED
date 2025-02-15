@@ -1,11 +1,8 @@
 import gsap from "gsap";
 
-// Declare a general timeline to use in all the animation functions.
-
-const tl = gsap.timeline();
-
-// Preloader Animation
 export const preLoaderAnim = () => {
+  const tl = gsap.timeline();
+
   tl.to("body", {
     duration: 0.1,
     css: { overflowY: "hidden" },
@@ -20,20 +17,20 @@ export const preLoaderAnim = () => {
       opacity: 1,
       ease: "Power3.easeOut",
     })
-    .from(".texts-container span", {
-      duration: 1.5,
+    .from(".texts-container .letter", {
+      duration: 1.2,
       delay: 1,
-      y: 70,
-      skewY: 10,
-      stagger: 0.4,
-      ease: "Power3.easeOut",
+      x: 100,  // Move from the right
+      opacity: 0,
+      stagger: 0.05, // Animate each letter one after another
+      ease: "power3.out",
     })
-    .to(".texts-container span", {
+    .to(".texts-container .letter", {
       duration: 1,
-      y: 70,
-      skewY: -20,
-      stagger: 0.2,
-      ease: "Power3.easeOut",
+      x: -20, // Slight overshoot for a smoother effect
+      opacity: 1,
+      stagger: 0.02,
+      ease: "power3.out",
     })
 
     .to(".landing", {
@@ -56,13 +53,11 @@ export const preLoaderAnim = () => {
         duration: 1.5,
         height: "0vh",
         ease: "Power3.easeOut",
-        // onComplete: mobileLanding(),
       },
       "-=2"
     )
     .from(".landing__main .text", {
       duration: 2,
-      // scale: 0,
       y: 10,
       opacity: 0,
       stagger: {
