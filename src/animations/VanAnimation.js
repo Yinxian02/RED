@@ -29,7 +29,7 @@ export default function VanAnimation() {
         position: "absolute",
         top: "50%",
         transform: "translateY(-50%)",
-        width: "500px", // Adjust as needed
+        width: "500px",
         left: position + "px",
       }}
     />
