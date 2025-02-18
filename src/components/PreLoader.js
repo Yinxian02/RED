@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
 import logo from '../assets/logo.png' 
-import { preLoaderAnim } from "../animations";
+import { preLoaderAnim } from "../animations/PreLoaderAnimation";
 import '../styles/PreLoader.css'
+import VanAnimation from "../animations/VanAnimation";
 
 const PreLoader = () => {
   useEffect(() => {
@@ -18,7 +19,9 @@ const PreLoader = () => {
     <div className="preloader">
       <div className="logo-container">
         <img src={logo} className="logo" alt="logo" />
+        <VanAnimation />
       </div>
+
       <div className="texts-container">
           <span>{wrapLetters("RED PROJECT BORNEO")}</span>
       </div>
