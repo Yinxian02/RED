@@ -44,6 +44,12 @@ export const preLoaderAnim = () => {
       ease: "power3.inOut",
     }, "-=2")
 
+    .to(".texts-container", {
+      duration: 1,
+      opacity: 0,
+      ease: "power3.inOut",
+    }, "+=3")
+
     .to(".landing", {
       duration: 0.05,
       css: { overflowY: "hidden", height: "unset" },
