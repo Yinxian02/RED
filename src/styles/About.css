@@ -1,16 +1,83 @@
-#about-red-div {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh !important;
+.about-red-div {
+    width: 100%;
+    height: 100%;
     background-color: #882817;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    margin: auto;
 }
 
-h1 {
-    margin: 0;
+.tadika-polaroid-div {
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tadika-polaroid {
+    background-color: white;
+    padding: 0.1em;
+    border-radius: 5px;
+    border: 10px solid white;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tadika-image {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.about-text-div {
+    width: 60%;
+    text-align: left;
     padding: 20px;
-    color: white;
+}
+
+.about-text-div h1 {
+    font-size: 72px;
+    font-weight: 100;
+    line-height: 1.2;
+}
+
+.about-text-div p {
+    margin-top: 20px;
+    font-size: 24px;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .about-red-div {
+    flex-direction: column;
+  }
+
+  .tadika-polaroid-div {
+    width: 100%;
+  }
+
+  .tadika-image {
+    width: 350px;
+  }
+
+  .about-text-div {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .about-text-div h1 {
+    font-size: 32px;
+    font-weight: 100;
+    line-height: 1.2;
+  }
+
+  .about-text-div p {
+    font-size: 20px;
+  }
 }
 
 

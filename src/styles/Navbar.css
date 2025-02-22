@@ -1,0 +1,91 @@
+.navbar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    background: none;
+    height: 75px;
+    display: flex;
+    z-index: 30;
+    justify-content: space-between;
+    align-items: center;
+}
+  
+.menu-bars {
+    z-index: 30;
+    margin-left: 1rem;
+    font-size: 2rem;
+    background: none;
+    color: #b06b6b;
+}
+  
+.nav-menu {
+    z-index: 30;
+    background-color: #882817;
+    width: 400px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: -110%;
+    transition: 850ms;
+}
+  
+.nav-menu.active {
+    left: 0;
+    background-color: #882817;
+    transition: 450ms;
+    z-index: 40;
+}
+  
+.nav-list-item {
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    height: 60px;
+    color: #ffffff;
+}
+
+.nav-list-item:hover {
+    background-color: #b06b6b;
+    color: #fff;
+} 
+  
+.nav-menu-items {
+    z-index: 30;
+    width: 100%;
+    text-align: center;
+}
+  
+.navbar-toggle {
+    background-color: #882817;
+    color: #ffffff;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+  
+.socials-nav {
+    z-index: 30;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 1rem;
+    gap: 1rem;
+}
+
+.socials-nav .social-icon {
+    width: 32px;
+    height: 32px;
+    margin-top: 30px;
+    cursor: pointer;
+    opacity: 0.9;
+}
+
+.socials-nav .social-icon:hover {
+    opacity: 0.5;
+}
