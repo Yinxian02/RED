@@ -23,7 +23,7 @@ const PreLoader = () => {
       </div>
 
       <div className="texts-container">
-          <span>{wrapLetters("RED PROJECT BORNEO")}</span>
+          <span className="red-title">{wrapLetters("RED PROJECT BORNEO")}</span>
       </div>
     </div>
 

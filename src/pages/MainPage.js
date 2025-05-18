@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PreLoader from "../components/PreLoader";
 import Home from "./Home";
 import About from "./About";
@@ -11,33 +11,54 @@ import Navbar from "../components/Navbar";
 const MainPage = () => {
   const [activeSection, setActiveSection] = useState(0);
 
+  const homeRef = useRef(null);
+  const aboutRef = useRef(null);
+  const projectsRef = useRef(null);
+  const fundraisersRef = useRef(null);
+  const followUsRef = useRef(null);
+
+  const sectionRefs = [
+    homeRef,
+    aboutRef,
+    projectsRef,
+    fundraisersRef,
+    followUsRef,
+  ];
+
   const navigateToSection = (sectionIndex) => {
     setActiveSection(sectionIndex);
   };
 
+    useEffect(() => {
+      const targetRef = sectionRefs[activeSection];
+      if (targetRef.current) {
+        targetRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, [activeSection]);
+
   return (
     <div className="main-container">
-        {/* <PreLoader/> */}
+        <PreLoader/>
 
         <Navbar navigateToSection={navigateToSection}/>
         
-        <section className="section home-section">
+        <section className="section home-section" ref={homeRef}>
             <Home/>
         </section>
         
-        <section className="section about-section">
+        <section className="section about-section" ref={aboutRef}>
             <About/>
         </section>
         
-        <section className="section projects-section">
+        <section className="section projects-section" ref={projectsRef}>
             <PastProjects/>
         </section>
 
-        <section className="section fundraisers-section">
+        <section className="section fundraisers-section" ref={fundraisersRef}>
             <Fundraisers/>
         </section>
 
-        <section className="section follow-us-section">
+        <section className="section follow-us-section" ref={followUsRef}>
             <FollowUs/>
         </section>
     </div>
