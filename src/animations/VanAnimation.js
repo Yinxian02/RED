@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import van from "../assets/van.png";
+import van from "../assets/design/van.png";
 
 export default function VanAnimation() {
   const [position, setPosition] = useState(window.innerWidth);
