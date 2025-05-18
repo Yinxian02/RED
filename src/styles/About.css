@@ -1,6 +1,6 @@
 .about-red-div {
     width: 100%;
-    height: 100%;
+    height: 100vh;
     background-color: #882817;
     color: white;
     display: flex;
@@ -67,8 +67,8 @@ mark {
 }
 
 .about-description-div {
-    width: 100%;
-    height: 100%;
+    /* width: 100%; */
+    height: 100vh;
     background-image: url('../assets/night-sky2.jpeg');
     background-size: cover;
     background-position: center;
@@ -105,6 +105,7 @@ mark {
   width: 100%;
   height: auto;
   background-color: #F2F2F2;
+  padding-bottom: 100px;
 }
 
 .aims-and-objectives-title-div {
@@ -132,6 +133,7 @@ mark {
 @media (max-width: 768px) {
   .about-red-div {
     flex-direction: column;
+    height: auto;
   }
 
   .tadika-polaroid-div {

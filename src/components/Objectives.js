@@ -42,7 +42,6 @@ const Objectives = () => {
     setFlipped((prev) =>
       prev.map((flip, i) => (i === index ? !flip : flip))
     );
-    console.log(flipped);
   };
 
   return (
