@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import PreLoader from "../components/PreLoader";
 import Home from "./Home";
 import About from "./About";
@@ -17,24 +17,20 @@ const MainPage = () => {
   const fundraisersRef = useRef(null);
   const followUsRef = useRef(null);
 
-  const sectionRefs = [
-    homeRef,
-    aboutRef,
-    projectsRef,
-    fundraisersRef,
-    followUsRef,
-  ];
+  const sectionRefs = useMemo(() => [
+    homeRef, aboutRef, projectsRef, fundraisersRef, followUsRef
+  ], []);
 
   const navigateToSection = (sectionIndex) => {
     setActiveSection(sectionIndex);
   };
 
-    useEffect(() => {
-      const targetRef = sectionRefs[activeSection];
-      if (targetRef.current) {
-        targetRef.current.scrollIntoView({ behavior: 'smooth' });
-      }
-    }, [activeSection]);
+  useEffect(() => {
+    const targetRef = sectionRefs[activeSection];
+    if (targetRef.current) {
+      targetRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [activeSection, sectionRefs]);
 
   return (
     <div className="main-container">
