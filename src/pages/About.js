@@ -1,6 +1,6 @@
 import React from 'react'
 import '../styles/About.css'
-import tadikaPolaroid from '../assets/tadika kami front.jpeg'
+import tadikaPolaroid from '../assets/design/tadika kami front.jpeg'
 import Objectives from '../components/Objectives'
 
 function About() {

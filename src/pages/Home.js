@@ -1,5 +1,5 @@
 import React from 'react';
-import home from '../assets/tadika kami full.png'
+import home from '../assets/design/tadika kami full.png'
 import '../styles/Home.css'
 
 const Home = () => {
