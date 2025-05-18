@@ -34,7 +34,7 @@ const MainPage = () => {
 
   return (
     <div className="main-container">
-        {/* <PreLoader/> */}
+        <PreLoader/>
 
         <Navbar navigateToSection={navigateToSection}/>
         

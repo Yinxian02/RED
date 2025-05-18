@@ -1,20 +1,20 @@
 import '../styles/PastProjects.css'
 
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+// import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
-const mapContainerStyle = {
-  height: '400px',
-  width: '100%'
-};
+// const mapContainerStyle = {
+//   height: '400px',
+//   width: '100%'
+// };
 
-const center = {
-  lat: 4.399068,
-  lng: 111.270459
-};
+// const center = {
+//   lat: 4.399068,
+//   lng: 111.270459
+// };
 
-const locations = [
-  { id: 1, lat: 7.170929408104118, lng: 117.51978289942377, name: 'Tadika Kami' },
-];
+// const locations = [
+//   { id: 1, lat: 7.170929408104118, lng: 117.51978289942377, name: 'Tadika Kami' },
+// ];
 
 function PastProjects() {
   return (
