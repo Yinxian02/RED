@@ -3,8 +3,8 @@ const projectsList = [
     id: 1,
     name: "Kampung Bingolon, Kudat",
     year: 2022,
-    latitude: 7.170929408104118,
-    longitude: 117.51978289942377,
+    latitude: 6.8269292779527975,
+    longitude: 116.68417570159167,
     paragraph: "The COVID-19 pandemic paused RED’s annual operations for two years (2020–2021), with no summer expeditions and limited term-time activities. In 2022, as restrictions eased and our project was approved, we were excited to finally return to the field. Despite a leaner team with fewer experienced volunteers, we successfully carried out a rewarding expedition—thanks to countless discussions, creative problem-solving, and the team’s unwavering dedication.",
     reportLink: "https://drive.google.com/file/d/1V27RwjMI7j7GvgLo04eWF6Wl0ACRtoHe/view?usp=sharing",
     youtubeLink: "https://www.youtube.com/embed/KpyeHYGpz1w?autoplay=1mute=1"
