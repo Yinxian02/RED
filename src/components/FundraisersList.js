@@ -1,7 +1,7 @@
-import biju_cover from '../assets/biju/002.jpg';
+import biju_cover from '../assets/biju/001.jpg';
 import cny_cover from '../assets/cny/004.JPG';
 import mnight_cover from '../assets/mnight/006.jpeg';
-import workshop_cover from '../assets/workshop/003.png';
+import workshop_cover from '../assets/workshop/001.png';
 
 const bijuGallery = [
     require('../assets/biju/001.jpg'),
@@ -11,20 +11,20 @@ const bijuGallery = [
 ]
 
 const cnyGallery = [
+  require('../assets/cny/004.JPG'),
     require('../assets/cny/001.jpg'),
     require('../assets/cny/002.jpg'),
     require('../assets/cny/003.jpeg'),
-    require('../assets/cny/004.JPG'),
 ]
 
 const mnightGallery = [
+    require('../assets/mnight/006.jpeg'),
+    require('../assets/mnight/007.jpeg'),
     require('../assets/mnight/001.jpg'),
     require('../assets/mnight/002.JPG'),
     require('../assets/mnight/003.JPG'),
     require('../assets/mnight/004.jpeg'),
     require('../assets/mnight/005.jpeg'),
-    require('../assets/mnight/006.jpeg'),
-    require('../assets/mnight/007.jpeg'),
 ]
 
 const workshopGallery = [
