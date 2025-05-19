@@ -1,0 +1,12 @@
+.fundraisers-div {
+    width: 100%;
+    height: 100vh;
+    background-color: #882817;
+    color: white;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
