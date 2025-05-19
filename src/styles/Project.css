@@ -16,7 +16,7 @@
   display: flex;
   justify-content: center;
   gap: 1rem;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 
 .tab-icon-btn {
@@ -55,6 +55,7 @@
   color: #d9d9d9;
   padding: 10px;
   transition: transform 0.2s;
+  position: absolute;
 }
 
 .carousel-btn:hover {
@@ -62,12 +63,10 @@
 }
 
 .carousel-btn.left {
-  position: absolute;
   left: 10px;
 }
 
 .carousel-btn.right {
-  position: absolute;
   right: 10px;
 }
 
@@ -79,7 +78,7 @@
 }
 
 .project-name {
-  font-size: 48px;
+  font-size: 40px;
   font-weight: bold;
   margin-top: 10px;
 }
@@ -95,6 +94,42 @@
   color:black;
   text-align: justify;
   margin-top: 10px;
+}
+
+.report-download-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.dino-image {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.download-btn {
+  background-color: #882817;
+  color: white;
+  padding: 20px;
+  font-size: 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #b93e3e;
+}
+
+.embed-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 @media (max-width: 768px) {
@@ -119,5 +154,15 @@
 
   .project-description {
     font-size: 12px;
+  }
+
+  .download-btn {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .tab-icon {
+    width: 20px;
+    height: 20px;
   }
 }

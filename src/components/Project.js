@@ -7,12 +7,14 @@ import iconReport from '../assets/icons/project-folder.png';
 import iconVideo from '../assets/icons/project-video.png';
 import iconGallery from '../assets/icons/project-gallery.png';
 
+import dinoImage from '../assets/design/project-dino.png';
+
 const Project = ({ project, onPrev, onNext }) => {
   const [activeTab, setActiveTab] = useState('details');
 
   const hasReport = !!project.reportLink;
   const hasVideo = !!project.youtubeLink;
-  const hasImage = !!project.image;
+  const hasGallery = !!project.gallery && project.gallery.length > 0;
 
   const tabs = [
     {
@@ -38,7 +40,7 @@ const Project = ({ project, onPrev, onNext }) => {
           },
         ]
       : []),
-    ...(hasImage
+    ...(hasGallery
       ? [
           {
             id: 'gallery',
@@ -62,15 +64,21 @@ const Project = ({ project, onPrev, onNext }) => {
         );
       case 'report':
         return (
-          <div className='embed-container'>
-            <iframe
-              src={project.reportLink.replace('/view', '/preview')}
-              title="Project Report"
-              width="100%"
-              height="500"
-              allow="autoplay"
-              frameBorder="0"
+          <div className='report-download-container'>
+            <img
+              src={dinoImage}
+              alt='Cute Dino'
+              className='dino-image'
             />
+            <a
+              href={project.reportLink}
+              target='_blank'
+              rel='noopener noreferrer'
+              className='download-btn'
+              download
+            >
+              Download Project Report {project.year}
+            </a>
           </div>
         );
       case 'video':
@@ -79,8 +87,8 @@ const Project = ({ project, onPrev, onNext }) => {
             <iframe
               src={project.youtubeLink}
               title="Project Video"
-              width="100%"
-              height="500"
+              width="80%"
+              height="400"
               allow="autoplay; encrypted-media"
               allowFullScreen
               frameBorder="0"
@@ -97,9 +105,19 @@ const Project = ({ project, onPrev, onNext }) => {
     }
   };
 
+  const handlePrev = () => {
+    setActiveTab('details');
+    onPrev();
+  };
+
+  const handleNext = () => {
+    setActiveTab('details');
+    onNext();
+  };
+
   return (
     <div className='carousel'>
-      <button className='carousel-btn left' onClick={onPrev}>
+      <button className='carousel-btn left' onClick={handlePrev}>
         <FaChevronLeft />
       </button>
 
@@ -119,7 +137,7 @@ const Project = ({ project, onPrev, onNext }) => {
         <div className='tab-content'>{renderTabContent()}</div>
       </div>
 
-      <button className='carousel-btn right' onClick={onNext}>
+      <button className='carousel-btn right' onClick={handleNext}>
         <FaChevronRight />
       </button>
     </div>
