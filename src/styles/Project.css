@@ -1,0 +1,197 @@
+.carousel {
+  position: relative;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  background-color: white;
+  color: #882817;
+}
+
+.project-tab-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1rem;
+}
+
+.tab-icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.tab-icon-btn.active,
+.tab-icon-btn:hover {
+  opacity: 1;
+}
+
+.tab-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.project-content {
+  width: 100%;
+}
+
+.project-card {
+  text-align: center;
+  padding: 0 40px;
+}
+
+.carousel-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #d9d9d9;
+  padding: 10px;
+  transition: transform 0.2s;
+  position: absolute;
+}
+
+.carousel-btn:hover {
+  transform: scale(1.2);
+}
+
+.carousel-btn.left {
+  left: 10px;
+}
+
+.carousel-btn.right {
+  right: 10px;
+}
+
+.project-image {
+  width: 60%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.project-name {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.project-year {
+  font-size: 28px;
+  color: #97594f;
+  margin-top: 5px;
+}
+
+.project-description {
+  font-size: 20px;
+  color:black;
+  text-align: justify;
+  margin-top: 10px;
+}
+
+.report-download-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+}
+
+.dino-image {
+  width: 200px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.download-btn {
+  background-color: #882817;
+  color: white;
+  padding: 20px;
+  font-size: 20px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #b93e3e;
+}
+
+.embed-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.project-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.gallery-thumb {
+  width: 30%;
+  max-width: 250px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.gallery-thumb:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    width: 100%;
+  }
+
+  .project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .project-name {
+    font-size: 28px;
+  }
+
+  .project-year {
+    font-size: 20px;
+  }
+
+  .project-description {
+    font-size: 12px;
+  }
+
+  .download-btn {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .tab-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .gallery-thumb {
+    width: 45%;
+    max-width: 90px;
+  }
+}

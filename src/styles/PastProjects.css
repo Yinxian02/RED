@@ -7,6 +7,42 @@
     padding: 20px;
     align-items: center;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
 }
+
+.google-map-div {
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.project-details-div {
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+  .past-projects-div {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .google-map-div {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .project-details-div {
+    width: 100%;
+    height: auto;
+}
+}
+
+
