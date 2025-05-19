@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import '../styles/Project.css'; 
+import ImageModal from './ImageModal';
 
 import iconDetails from '../assets/icons/project-home.png';
 import iconReport from '../assets/icons/project-folder.png';
@@ -98,8 +99,28 @@ const Project = ({ project, onPrev, onNext }) => {
       case 'gallery':
         return (
           <div className='project-gallery'>
+            {project.gallery?.map((img, index) => (
+              <img
+                key={index}
+                src={img}
+                alt={`Gallery ${index + 1}`}
+                className='gallery-thumb'
+                onClick={() => openModal(index)}
+              />
+            ))}
+
+            {isModalOpen && (
+              <ImageModal
+                images={project.gallery}
+                currentIndex={activeImageIndex}
+                onClose={closeModal}
+                onPrev={goPrev}
+                onNext={goNext}
+              />
+            )}
           </div>
         );
+
       default:
         return null;
     }
@@ -114,6 +135,19 @@ const Project = ({ project, onPrev, onNext }) => {
     setActiveTab('details');
     onNext();
   };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+  const openModal = (index) => {
+    setActiveImageIndex(index);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => setIsModalOpen(false);
+  const goPrev = () => setActiveImageIndex((prev) => (prev === 0 ? project.gallery.length - 1 : prev - 1));
+  const goNext = () => setActiveImageIndex((prev) => (prev === project.gallery.length - 1 ? 0 : prev + 1));
+
 
   return (
     <div className='carousel'>

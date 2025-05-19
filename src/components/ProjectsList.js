@@ -5,6 +5,21 @@ import project2017Image from '../assets/projects/project_2017.png';
 import project2016Image from '../assets/projects/project_2016.png';
 import project2015Image from '../assets/projects/project_2015.png';
 
+const gallery2022 = [
+  require('../assets/gallery2022/001.jpeg'),
+  require('../assets/gallery2022/002.jpeg'),
+  require('../assets/gallery2022/003.JPG'),
+  require('../assets/gallery2022/004.JPG'),
+  require('../assets/gallery2022/005.jpeg'),
+  require('../assets/gallery2022/006.JPG'),
+  require('../assets/gallery2022/007.jpeg'),
+  require('../assets/gallery2022/008.jpeg'),
+  require('../assets/gallery2022/009.jpeg'),
+  require('../assets/gallery2022/010.jpeg'),
+  require('../assets/gallery2022/011.jpeg')
+
+];
+
 const projectsList = [
   {
     id: 1,
@@ -16,7 +31,7 @@ const projectsList = [
     description: "The COVID-19 pandemic paused RED’s annual operations for two years. In 2022, as restrictions eased and our project was approved, we were excited to finally return to the field. Despite a leaner team with fewer experienced volunteers, we successfully carried out a rewarding expedition — thanks to countless discussions, creative problem-solving, and the team’s unwavering dedication.",
     reportLink: "https://drive.google.com/file/d/1V27RwjMI7j7GvgLo04eWF6Wl0ACRtoHe/view?usp=sharing",
     youtubeLink: "https://www.youtube.com/embed/KpyeHYGpz1w?autoplay=1mute=1",
-    gallery: []
+    gallery: gallery2022
   },
   {
     id: 2,
