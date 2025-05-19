@@ -50,7 +50,16 @@ function Fundraisers() {
                   />
                 </button>
                 <h2 className="fundraisers-tab-title">{tab.title}</h2>
-                <img src={tab.image} alt={tab.label} className="fundraisers-tab-image"/>
+                <img 
+                  src={tab.image} 
+                  alt={tab.label} 
+                  className="fundraisers-tab-image"
+                  onClick={() => {
+                    setGalleryImages(tab.gallery);
+                    setCurrentIndex(0);
+                    setShowGallery(true);
+                  }}
+                  style={{ cursor: 'pointer' }}/>
                 <p className="fundraisers-tab-description">{tab.description}</p>
               </div>
 
