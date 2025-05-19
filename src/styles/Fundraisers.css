@@ -1,0 +1,132 @@
+.fundraisers-div {
+    width: 100%;
+    height: 100vh;
+    background-color: #882817;
+    color: white;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fundraisers-title {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.fundraisers-tabs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 10px;
+  padding-left: 40px;
+}
+
+.fundraisers-tab-item {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: transparent;
+  border: 2px solid white;
+}
+
+.fundraisers-tab-item.active {
+  background-color: white;
+  color: #882817;
+  font-weight: bold;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.fundraisers-tab-content-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.fundraisers-tab-content {
+  width: 80%;
+  max-width: 1200px;
+}
+
+.fundraisers-card {
+  position: relative;
+  background-color: #d9d9d9;
+  color: #882817;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 8px 8px 100px 5px rgba(0, 0, 0, 0.2);
+}
+
+.fundraisers-tab-title {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.fundraisers-tab-image {
+  width: 60%;
+  height: 300px;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.fundraisers-tab-description {
+  font-size: 16px;
+  line-height: 1.4;
+  text-align: justify;
+}
+
+.fundraisers-gallery-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.fundraisers-gallery-button:hover {
+  opacity: 0.6;
+}
+
+.fundraisers-gallery-icon {
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 768px) {
+  .fundraisers-div {
+    height: auto;
+  }
+
+  .fundraisers-tabs {
+    gap: 5px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+  }
+
+  .fundraisers-tab-item {
+    font-size: 10px;
+    padding: 5px;
+  }
+
+  .fundraisers-tab-title {
+    font-size: 28px;
+  }
+
+  .fundraisers-tab-image {
+    width: 100%;
+  }
+
+  .fundraisers-tab-description {
+    font-size: 12px;
+    line-height: 1.4;
+  }
+}

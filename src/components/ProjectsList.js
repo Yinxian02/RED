@@ -16,8 +16,9 @@ const gallery2022 = [
   require('../assets/gallery2022/008.jpeg'),
   require('../assets/gallery2022/009.jpeg'),
   require('../assets/gallery2022/010.jpeg'),
-  require('../assets/gallery2022/011.jpeg')
-
+  require('../assets/gallery2022/011.jpeg'),
+  require('../assets/gallery2022/012.JPG'),
+  require('../assets/gallery2022/013.JPG')
 ];
 
 const projectsList = [
