@@ -1,7 +1,8 @@
+import React, { useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import '../styles/PastProjects.css'
 import projectsList from '../components/ProjectsList.js'
-
+import Project from '../components/Project.js'
 
 const mapContainerStyle = {
   height: '500px',
@@ -14,6 +15,20 @@ const center = {
 };
 
 function PastProjects() {
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+
+  const handleMapMarkerClick = (index) => {
+    setSelectedProjectIndex(index);
+  };
+
+  const navigateLeft = () => {
+    setSelectedProjectIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : projectsList.length - 1));
+  };
+
+  const navigateRight = () => {
+    setSelectedProjectIndex((prevIndex) => (prevIndex < projectsList.length - 1 ? prevIndex + 1 : 0));
+  };
+
   return (
     <>
     <div className='past-projects-div'>
@@ -24,14 +39,21 @@ function PastProjects() {
             center={center}
             zoom={8}
           >
-            {projectsList.map(loc => (
-              <Marker key={loc.id} position={{ lat: loc.latitude, lng: loc.longitude }} />
+            {projectsList.map((loc, index) => (
+              <Marker 
+                key={loc.id} 
+                position={{ lat: loc.latitude, lng: loc.longitude }} 
+                onClick={() => handleMapMarkerClick(index)}/>
             ))}
           </GoogleMap>
         </LoadScript>
       </div>
       <div className='project-details-div'>
-
+        <Project
+          project={projectsList[selectedProjectIndex]}
+          onPrev={navigateLeft}
+          onNext={navigateRight}
+        />
       </div>
     </div>
     </>

@@ -26,3 +26,23 @@
     justify-content: center;
     align-items: center;
 }
+
+@media (max-width: 768px) {
+  .past-projects-div {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .google-map-div {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+  }
+
+  .project-details-div {
+    width: 100%;
+    height: auto;
+}
+}
+
+
