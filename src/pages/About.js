@@ -32,6 +32,7 @@ function About() {
         <div className='aims-and-objectives-title-div'>
           <h1 className='aims-and-objectives-title'>AIMS & OBJECTIVES</h1>
         </div>
+        <h4 className='aims-tip'>tap on aim to learn more</h4>
         <Objectives />
       </div>
     </>

@@ -27,6 +27,11 @@
         box-shadow: 3px 3px 8px hsla(0, 0%, 0%, 0.1);
     }
 
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 1.5s ease-out forwards;
+    }
+
     .timeline-item:nth-child(odd) .timeline-card{
         left:53%;
     }
@@ -74,6 +79,7 @@
     }
 
     .card-image {
+      opacity: 0.5;
       max-width: 100%;
       height: auto;
       object-fit: cover;
@@ -88,6 +94,7 @@
     }
 
     .card-title {
+      opacity: 0.5;
       font-size: 32px;
       margin-bottom: 30px;
     }
@@ -96,7 +103,6 @@
       font-size: 24px;
       line-height: 1.5;
     }
-
 
     @media(max-width: 767px) {
       .timeline-line {
@@ -130,3 +136,14 @@
       }
     }
   }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
