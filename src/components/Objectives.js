@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import '../styles/Objectives.css';
 import aimExperience from '../assets/aims/aim-experience.jpeg'
 import aimInfrastructure from '../assets/aims/aim-infrastructure.jpeg'
@@ -37,6 +37,38 @@ const events = [
 
 const Objectives = () => {
   const [flipped, setFlipped] = useState(Array(events.length).fill(false));
+  const [visibleCards, setVisibleCards] = useState([]);
+
+  const cardRefs = useRef([]);
+
+  useEffect(() => {
+    const localRefs = cardRefs.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = parseInt(entry.target.dataset.index);
+          if (entry.isIntersecting) {
+            setVisibleCards((prev) =>
+              prev.includes(index) ? prev : [...prev, index]
+            );
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    localRefs.forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => {
+      localRefs.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
+
 
   const toggleFlip = (index) => {
     setFlipped((prev) =>
@@ -54,14 +86,33 @@ const Objectives = () => {
             className="timeline-card"
             onClick={() => toggleFlip(index)}
             role="button"
+            ref={(el) => (cardRefs.current[index] = el)}
+            data-index={index}
           >
             <div className={`card-inner ${flipped[index] ? "flipped" : ""}`}>
               <div className="card-front">
-                <h3 className='card-title'>{event.title}</h3>
+                <h3 className={`card-title`} 
+                    style={
+                      visibleCards.includes(index)
+                        ? {
+                            animation: `fadeUp 1s ease-out forwards`,
+                            animationDelay: `${index * 0.2}s`,
+                          }
+                        : {}
+                    }
+                    >{event.title}</h3>
                 <img
                   src={event.image}
                   alt={event.title}
-                  className="card-image"
+                  className={`card-image`}
+                  style={
+                    visibleCards.includes(index)
+                      ? {
+                          animation: `fadeUp 1s ease-out forwards`,
+                          animationDelay: `${index * 0.2}s`,
+                        }
+                      : {}
+                  }
                 />
               </div>
               <div className="card-back">
